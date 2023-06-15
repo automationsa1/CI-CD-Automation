@@ -1,0 +1,211 @@
+{
+  "name": "CICDS | BOT | Display command options",
+  "description": "When there is a new command to Slack Workbot, do action and other actions",
+  "version": 2,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "slack_bot",
+    "name": "bot_command_v2",
+    "as": "8e60f19a",
+    "title": null,
+    "description": "New <span class=\"provider\">workato cicd start</span> command to <span class=\"provider\">Slack Workbot</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+      "domain": false,
+      "name": false,
+      "scope": false
+    },
+    "input": {
+      "allow_dialog": "true",
+      "domain": "workato",
+      "name": "cicd",
+      "scope": "start",
+      "description": "This command presents Workato CI/CD options."
+    },
+    "extended_output_schema": [
+      {
+        "label": "Parameters",
+        "name": "parameters",
+        "properties": [
+
+        ],
+        "type": "object"
+      }
+    ],
+    "visible_config_fields": [
+      "domain",
+      "name",
+      "scope",
+      "parameters",
+      "slash_command",
+      "slash_command.enable",
+      "hide_from_help",
+      "allow_dialog",
+      "description"
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "slack_bot",
+            "name": "post_bot_reply_v2",
+            "as": "06605174",
+            "title": null,
+            "description": "Post <span class=\"provider\">command reply</span> as <span class=\"provider\">Slack Workbot</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "blocks.6.actions.0.style": false,
+              "blocks.6.actions.1.style": false,
+              "blocks.6.actions.0.bot_command": false,
+              "blocks.6.actions.1.bot_command": false,
+              "blocks.6.actions.2.options.0.bot_command": false,
+              "blocks.6.actions.2.options.1.bot_command": false
+            },
+            "input": {
+              "blocks": [
+                {
+                  "block_type": "section_with_text",
+                  "section_text": " :infinity: *Welcome to Workato CI/CD*",
+                  "button_type": "continue_flow"
+                },
+                {
+                  "block_type": "section_with_text",
+                  "section_text": "Choose an option:",
+                  "button_type": "continue_flow"
+                },
+                {
+                  "block_type": "section_with_text",
+                  "section_text": "*Create release*: Export a project to create a release and deploy it to the test environment.",
+                  "button_type": "continue_flow"
+                },
+                {
+                  "block_type": "section_with_text",
+                  "section_text": "*Deploy existing*: Deploy an existing release to test or production environment.",
+                  "button_type": "continue_flow"
+                },
+                {
+                  "block_type": "section_with_text",
+                  "section_text": "*Configure project*: Configure new project for CI/CD.",
+                  "button_type": "continue_flow"
+                },
+                {
+                  "block_type": "divider",
+                  "button_type": "continue_flow"
+                },
+                {
+                  "block_type": "actions",
+                  "actions": [
+                    {
+                      "type": "button",
+                      "button_title": ":heavy_plus_sign: Create release",
+                      "bot_command": "workato create release",
+                      "style": "primary",
+                      "button_type": "continue_flow"
+                    },
+                    {
+                      "type": "button",
+                      "button_title": ":rocket: Deploy release",
+                      "bot_command": "workato deploy release",
+                      "style": "default",
+                      "button_type": "continue_flow"
+                    },
+                    {
+                      "type": "select_menu",
+                      "placeholder_text": ":gear: Configure project",
+                      "menu_type": "static_select",
+                      "options": [
+                        {
+                          "title": "Configure Project (Full release)",
+                          "bot_command": "workato configure project",
+                          "params": "release_mode: full"
+                        },
+                        {
+                          "title": "Configure Manifest (Partial release)",
+                          "bot_command": "workato configure project",
+                          "params": "release_mode: partial"
+                        }
+                      ],
+                      "button_type": "continue_flow"
+                    }
+                  ],
+                  "button_type": "continue_flow"
+                }
+              ]
+            },
+            "uuid": "6bf99f70-6dde-466e-9574-30716098f4b4"
+          },
+          {
+            "number": 3,
+            "as": "af3c7e9d",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+              {
+                "number": 4,
+                "provider": "slack_bot",
+                "name": "post_bot_reply_v2",
+                "as": "db266380",
+                "title": null,
+                "description": "Post <span class=\"provider\">command reply</span> as <span class=\"provider\">Slack Workbot</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "message.color": true
+                },
+                "input": {
+                  "message": {
+                    "title": ":warning: Error starting application",
+                    "title_link": "#{_('data.workato.job_context.job_url')}",
+                    "attachment_text": "#{_('data.catch.af3c7e9d.message')}",
+                    "color": "danger"
+                  }
+                },
+                "comment": "Notify errors to the user.",
+                "uuid": "d9a1f536-71c1-46d0-b6a4-2b0b8a42516e"
+              }
+            ],
+            "uuid": "6b650682-e6fb-4415-a2e4-6564d5075205"
+          }
+        ],
+        "uuid": "fc406258-7c7e-4426-9225-c99ec4cc0e0a"
+      }
+    ],
+    "comment": "Trigger on Workbot for Slack command \"workato cicd start\" to present different options.",
+    "uuid": "f6c12c90-1a2e-40c5-9a43-c966fd539e6a"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "slack_bot",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/ci_cd_connector_for_slack.connection.json",
+        "name": "CI CD Connector for Slack",
+        "folder": "CICD_Automation/Connections"
+      }
+    }
+  ]
+}
