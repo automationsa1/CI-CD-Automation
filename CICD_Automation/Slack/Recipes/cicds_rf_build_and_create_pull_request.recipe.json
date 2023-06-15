@@ -1,0 +1,1531 @@
+{
+  "name": "CICDS | RF | Build and create pull request",
+  "description": "When there is a function call, do action",
+  "version": 8,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "2efd93e9",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"control_type\":\"text\",\"label\":\"Project name\",\"name\":\"project_name\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"ID\",\"name\":\"id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"GitHub repository\",\"name\":\"github_repo\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release type\",\"name\":\"release_type\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release message\",\"name\":\"release_message\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release reference\",\"name\":\"release_reference\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Continuous delivery\",\"name\":\"continuous_delivery\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Test folder name\",\"name\":\"test_folder_name\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Test folder ID\",\"name\":\"test_folder_id\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Reviewer username\",\"name\":\"reviewer_username\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Reviewer Slack\",\"name\":\"reviewer_slack\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Commiter name\",\"name\":\"commiter_name\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Commiter email\",\"name\":\"commiter_email\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Channel ID\",\"name\":\"channel_id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release mode\",\"name\":\"release_mode\",\"type\":\"string\",\"optional\":false}]"
+    },
+    "extended_output_schema": [
+      {
+        "label": "Parameters",
+        "name": "parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Project name",
+            "name": "project_name",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "ID",
+            "name": "id",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "GitHub repository",
+            "name": "github_repo",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release type",
+            "name": "release_type",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release message",
+            "name": "release_message",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release reference",
+            "name": "release_reference",
+            "type": "string",
+            "optional": true
+          },
+          {
+            "control_type": "text",
+            "label": "Continuous delivery",
+            "name": "continuous_delivery",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Test folder name",
+            "name": "test_folder_name",
+            "type": "string",
+            "optional": true
+          },
+          {
+            "control_type": "text",
+            "label": "Test folder ID",
+            "name": "test_folder_id",
+            "type": "string",
+            "optional": true
+          },
+          {
+            "control_type": "text",
+            "label": "Reviewer username",
+            "name": "reviewer_username",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Reviewer Slack",
+            "name": "reviewer_slack",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Commiter name",
+            "name": "commiter_name",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Commiter email",
+            "name": "commiter_email",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Channel ID",
+            "name": "channel_id",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release mode",
+            "name": "release_mode",
+            "type": "string",
+            "optional": false
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "workato_variable",
+            "name": "declare_variable",
+            "as": "d7744099",
+            "title": "  Create variables package_content, package_id",
+            "description": "Create variables <span class=\"provider\">package_content</span>, <span class=\"provider\">package_id</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "variables": {
+                "schema": "[{\"control_type\":\"text\",\"label\":\"package_content\",\"name\":\"package_content\",\"type\":\"string\",\"optional\":true},{\"name\":\"package_id\",\"type\":\"string\",\"optional\":true,\"label\":\"package_id\",\"control_type\":\"text\"}]"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "control_type": "text",
+                "label": "package_content",
+                "name": "package_content",
+                "optional": true,
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "package_id",
+                "name": "package_id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "control_type": "form-schema-builder",
+                "exclude_fields": [
+                  "hint"
+                ],
+                "label": "Variables",
+                "name": "variables",
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Schema",
+                    "extends_schema": true,
+                    "broadcast_change_event": true,
+                    "type": "string",
+                    "name": "schema"
+                  },
+                  {
+                    "label": "Data",
+                    "type": "object",
+                    "name": "data",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "package_content",
+                        "name": "package_content",
+                        "type": "string",
+                        "optional": true,
+                        "hint": "Defaults to nil if not supplied.",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "package_id",
+                        "name": "package_id",
+                        "type": "string",
+                        "optional": true,
+                        "hint": "Defaults to nil if not supplied.",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "visible_config_fields": [
+              "variables.data.package_contents",
+              "variables",
+              "variables.schema",
+              "variables.data.package_content",
+              "variables.data.package_id"
+            ],
+            "uuid": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c"
+          },
+          {
+            "number": 3,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "equals_to",
+                  "lhs": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_mode')}",
+                  "rhs": "full",
+                  "uuid": "condition-6d0d8e1c-e6bd-4e85-9a1a-e7261408225f"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 4,
+                "provider": "cicd_for_workato_connector_1096414_1685367514",
+                "name": "build_download_package",
+                "as": "ba75ac9d",
+                "title": null,
+                "description": "Build and download <span class=\"provider\">package</span> from Workato <span class=\"provider\"></span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "api_mode": "Recipe Lifecycle Management"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "api_mode": "rlcm",
+                  "id": "81634",
+                  "description": "cicd_action: Review request\nrelease_log: #{_('data.workato_recipe_function.2efd93e9.parameters.release_message')}\nrelease_refs: #{_('data.workato_recipe_function.2efd93e9.parameters.release_reference')}\ncontinuous_delivery: #{_('data.workato_recipe_function.2efd93e9.parameters.continuous_delivery')}\nrequester: #{_('data.workato_recipe_function.2efd93e9.parameters.commiter_name')}"
+                },
+                "extended_input_schema": [
+                  {
+                    "control_type": "select",
+                    "label": "Workato APIs",
+                    "name": "api_mode",
+                    "optional": false,
+                    "pick_list": "api_mode",
+                    "type": "string"
+                  },
+                  {
+                    "control_type": "text",
+                    "hint": "Source manifest or project/folder ID to build.",
+                    "label": "ID",
+                    "name": "id",
+                    "optional": false,
+                    "type": "string"
+                  },
+                  {
+                    "control_type": "text",
+                    "hint": "Release description for documentation.",
+                    "label": "Description",
+                    "name": "description",
+                    "optional": true,
+                    "type": "string"
+                  }
+                ],
+                "comment": "Build and download the project from DEV environment.",
+                "uuid": "f0684661-dd48-4038-bc5c-6093860c6bea"
+              },
+              {
+                "number": 5,
+                "provider": "workato_variable",
+                "name": "update_variables",
+                "as": "68f13095",
+                "title": null,
+                "description": "Update variables <span class=\"provider\">package_content, package_id</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "name": [
+                    {
+                      "label": "package_content (step 3)",
+                      "value": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_content"
+                    },
+                    {
+                      "label": "package_id (step 3)",
+                      "value": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_id"
+                    }
+                  ]
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "name": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_content\nc1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_id",
+                  "package_content": "#{_('data.cicd_for_workato_connector_1096414_1685367514.ba75ac9d.content')}",
+                  "package_id": "#{_('data.cicd_for_workato_connector_1096414_1685367514.ba75ac9d.package_id')}"
+                },
+                "extended_input_schema": [
+                  {
+                    "control_type": "text",
+                    "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+                    "label": "package_content",
+                    "name": "package_content",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "strip_interpolation": true
+                  },
+                  {
+                    "control_type": "text",
+                    "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+                    "label": "package_id",
+                    "name": "package_id",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "strip_interpolation": true
+                  }
+                ],
+                "uuid": "6f7a5bac-2f6c-458a-9b3a-bb22995c1806"
+              },
+              {
+                "number": 6,
+                "keyword": "else",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                },
+                "block": [
+                  {
+                    "number": 7,
+                    "provider": "cicd_for_workato_connector_1096414_1685367514",
+                    "name": "build_download_package",
+                    "as": "0fa11935",
+                    "title": null,
+                    "description": "Build and download <span class=\"provider\">package</span> from Workato <span class=\"provider\">DEV</span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "api_mode": "Recipe Lifecycle Management",
+                      "workato_environment": "DEV"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "api_mode": "rlcm",
+                      "id": "81233"
+                    },
+                    "extended_input_schema": [
+                      {
+                        "control_type": "select",
+                        "label": "Workato APIs",
+                        "name": "api_mode",
+                        "optional": false,
+                        "pick_list": "api_mode",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Source manifest or project/folder ID to build.",
+                        "label": "ID",
+                        "name": "id",
+                        "optional": false,
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Release description for documentation.",
+                        "label": "Description",
+                        "name": "description",
+                        "optional": true,
+                        "type": "string"
+                      }
+                    ],
+                    "uuid": "f2661e75-31ae-4305-90fb-65e6568e60ce"
+                  },
+                  {
+                    "number": 8,
+                    "provider": "workato_variable",
+                    "name": "update_variables",
+                    "as": "c1900a8e",
+                    "title": null,
+                    "description": "Update variables <span class=\"provider\">package_content, package_id</span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "name": [
+                        {
+                          "label": "package_content (step 3)",
+                          "value": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_content"
+                        },
+                        {
+                          "label": "package_id (step 3)",
+                          "value": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_id"
+                        }
+                      ]
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "name": "c1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_content\nc1f71c13-9bb5-4f29-8991-27a698dc7e8c:d7744099:package_id",
+                      "package_content": "#{_('data.cicd_for_workato_connector_1096414_1685367514.0fa11935.content')}",
+                      "package_id": "#{_('data.cicd_for_workato_connector_1096414_1685367514.0fa11935.package_id')}"
+                    },
+                    "extended_input_schema": [
+                      {
+                        "control_type": "text",
+                        "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+                        "label": "package_content",
+                        "name": "package_content",
+                        "optional": true,
+                        "sticky": true,
+                        "type": "string",
+                        "strip_interpolation": true
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+                        "label": "package_id",
+                        "name": "package_id",
+                        "optional": true,
+                        "sticky": true,
+                        "type": "string",
+                        "strip_interpolation": true
+                      }
+                    ],
+                    "uuid": "0aa7c7a0-8727-4f24-a925-7a94e3762a66"
+                  }
+                ],
+                "comment": "...else use the RLCM manifest APIs.",
+                "uuid": "4b5da1fb-cd44-4f96-8417-139b3d7e5f2a"
+              }
+            ],
+            "comment": "Use new projects API for build...",
+            "uuid": "6751f06e-23b7-41d1-af0e-9f8fc5b25015"
+          },
+          {
+            "number": 9,
+            "provider": "cicd_for_git_hub_connector_1096414_1685367513",
+            "name": "create_branch_ref",
+            "as": "cb7ef2be",
+            "title": null,
+            "description": "Create <span class=\"provider\">branch</span> in GitHub <span class=\"provider\">#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "repo_name": "#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}",
+              "branch_name": "=\"feature-branch-\" + now.to_i"
+            },
+            "comment": "Create a branch reference in GitHub repository.",
+            "uuid": "6f6e7071-639e-491e-8a01-f487c64a8f27"
+          },
+          {
+            "number": 10,
+            "provider": "file_connector",
+            "name": "uncompress_file",
+            "as": "a76912ff",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "file_contents": "#{_('data.workato_variable.d7744099.package_content')}"
+            },
+            "comment": "Unzip the exported package contents.",
+            "uuid": "d3ca5007-b88f-45d7-8a80-37d008e877ce"
+          },
+          {
+            "number": 11,
+            "provider": "cicd_for_git_hub_connector_1096414_1685367513",
+            "name": "create_file_blob",
+            "as": "de19825a",
+            "title": null,
+            "description": "Create <span class=\"provider\">blob</span> in GitHub <span class=\"provider\">#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "repo_name": "#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}",
+              "files": {
+                "____source": "#{_('data.file_connector.a76912ff.file_list')}",
+                "file_path": "=if _('data.file_connector.a76912ff.file_list.first.file_directory') == \".\" || _('data.file_connector.a76912ff.file_list.first.file_directory') == \"..\"\n_('data.file_connector.a76912ff.file_list.first.file_name')\nelse\n_('data.file_connector.a76912ff.file_list.first.file_directory') + \"/\" + _('data.file_connector.a76912ff.file_list.first.file_name')\nend",
+                "file_content": "#{_('data.file_connector.a76912ff.file_list.first.file_contents')}"
+              }
+            },
+            "comment": "Stage package file blobs in GitHub branch.",
+            "uuid": "83b62039-99a6-4d98-8f56-9d7b581a70da"
+          },
+          {
+            "number": 12,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "is_not_true",
+                  "lhs": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.de19825a.success')}",
+                  "rhs": "",
+                  "uuid": "condition-e7be7346-fe0a-4a83-9a85-8199be5e9b6e"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 13,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "=_('data.cicd_for_git_hub_connector_1096414_1685367513.de19825a.files_failed')"
+                },
+                "uuid": "945655ab-3564-46d3-9008-5fedab173fcb"
+              }
+            ],
+            "uuid": "6fecc5d4-66c0-42e1-a4a1-16ab04a7fb37"
+          },
+          {
+            "number": 14,
+            "provider": "cicd_for_git_hub_connector_1096414_1685367513",
+            "name": "commit_new_branch",
+            "as": "a89619ab",
+            "title": null,
+            "description": "Commit <span class=\"provider\">branch</span> in GitHub <span class=\"provider\">#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "release_type": false,
+              "continuous_delivery": false,
+              "release_mode": false
+            },
+            "input": {
+              "git_tree": {
+                "mode": "100644",
+                "type": "blob",
+                "____source": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.de19825a.files_staged')}",
+                "path": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.de19825a.files_staged.first.file_path')}",
+                "sha": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.de19825a.files_staged.first.sha')}"
+              },
+              "repo_name": "#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}",
+              "branch_reference": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.cb7ef2be.branch_reference')}",
+              "branch_reference_sha": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.cb7ef2be.branch_reference_sha')}",
+              "release_type": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_type')}",
+              "package_id": "#{_('data.workato_variable.d7744099.package_id')}",
+              "release_message": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_message')}",
+              "commit_author_name": "#{_('data.workato_recipe_function.2efd93e9.parameters.commiter_name')}",
+              "commit_author_email": "#{_('data.workato_recipe_function.2efd93e9.parameters.commiter_email')}",
+              "continuous_delivery": "#{_('data.workato_recipe_function.2efd93e9.parameters.continuous_delivery')}",
+              "folder_id": "#{_('data.workato_recipe_function.2efd93e9.parameters.test_folder_id')}",
+              "reference_id": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_reference')}",
+              "release_mode": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_mode')}",
+              "id": "#{_('data.workato_recipe_function.2efd93e9.parameters.id')}"
+            },
+            "visible_config_fields": [
+              "repo_name",
+              "branch_reference",
+              "branch_reference_sha",
+              "git_tree",
+              "git_tree.path",
+              "git_tree.mode",
+              "git_tree.type",
+              "git_tree.sha",
+              "release_type",
+              "manifest_id",
+              "folder_id",
+              "reference_id"
+            ],
+            "comment": "Commit staged changes to feature branch.",
+            "uuid": "4977939c-8575-4db9-9a3e-373464817288"
+          },
+          {
+            "number": 15,
+            "provider": "cicd_for_git_hub_connector_1096414_1685367513",
+            "name": "create_pull_request",
+            "as": "dcc5fc61",
+            "title": null,
+            "description": "Create <span class=\"provider\">pull request</span> in GitHub <span class=\"provider\">#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "repo_name": "#{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}",
+              "pull_request_title": "#{_('data.workato_recipe_function.2efd93e9.parameters.project_name')}",
+              "head_branch_name": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.cb7ef2be.branch_reference')}",
+              "reviewer_username": "=_('data.workato_recipe_function.2efd93e9.parameters.reviewer_username') == \"NA\" ? \"\" : _('data.workato_recipe_function.2efd93e9.parameters.reviewer_username')"
+            },
+            "visible_config_fields": [
+              "reviewer_username"
+            ],
+            "comment": "Create PR for feature branch against main branch.",
+            "uuid": "a1b5c597-c342-4913-931b-5f90c61b44b2"
+          },
+          {
+            "number": 16,
+            "provider": "slack_bot",
+            "name": "post_bot_message",
+            "as": "c2c7823d",
+            "title": null,
+            "description": "Post <span class=\"provider\">message</span> as <span class=\"provider\">Slack Workbot</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "channel": true,
+              "message.color": true
+            },
+            "input": {
+              "channel": "#{_('data.workato_recipe_function.2efd93e9.parameters.channel_id')}",
+              "message": {
+                "title": ":tada: Your PR is ready!!",
+                "attachment_text": "Your PR <#{_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.pull_request_url')}|##{_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.pull_request_number')}> is ready and under review. Once the PR is approved, new release will be created and deployed (if CD is selected) and notified.",
+                "color": "good"
+              },
+              "attachment_fields": [
+                {
+                  "title": "Project name",
+                  "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.project_name')}"
+                },
+                {
+                  "title": "Release type",
+                  "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_type')}"
+                },
+                {
+                  "title": "Continuous delivery",
+                  "value": "=_('data.workato_recipe_function.2efd93e9.parameters.continuous_delivery').capitalize"
+                },
+                {
+                  "title": "Release mode",
+                  "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_mode')}"
+                },
+                {
+                  "title": "Reviwer assigned",
+                  "value": "=_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.reviewer_assigned') ? \"Yes\" : \"No\""
+                },
+                {
+                  "title": "Reviewer",
+                  "value": "<@#{_('data.workato_recipe_function.2efd93e9.parameters.reviewer_slack')}>"
+                }
+              ]
+            },
+            "visible_config_fields": [
+              "channel",
+              "blocks",
+              "blocks.block_type",
+              "blocks.section_text",
+              "blocks.image_url",
+              "blocks.alt_text",
+              "blocks.button_title",
+              "blocks.url",
+              "blocks.bot_command",
+              "blocks.params",
+              "blocks.style",
+              "blocks.attachment_fields",
+              "blocks.attachment_fields.value",
+              "blocks.placeholder_text",
+              "blocks.menu_type",
+              "blocks.dynamic_menu_recipe",
+              "blocks.field_name",
+              "blocks.options",
+              "blocks.options.title",
+              "blocks.options.bot_command",
+              "blocks.options.params",
+              "blocks.options.init_value",
+              "blocks.init_option",
+              "blocks.initial_date",
+              "blocks.options.value",
+              "blocks.init_options",
+              "blocks.image_title",
+              "blocks.external_id",
+              "blocks.elements",
+              "blocks.elements.type",
+              "blocks.elements.text",
+              "blocks.elements.image_url",
+              "blocks.elements.alt_text",
+              "blocks.actions",
+              "blocks.actions.type",
+              "blocks.actions.button_title",
+              "blocks.actions.url",
+              "blocks.actions.bot_command",
+              "blocks.actions.params",
+              "blocks.actions.style",
+              "blocks.actions.placeholder_text",
+              "blocks.actions.initial_date",
+              "blocks.actions.field_name",
+              "blocks.actions.options",
+              "blocks.actions.options.params",
+              "blocks.actions.menu_type",
+              "blocks.actions.dynamic_menu_recipe",
+              "blocks.objects",
+              "blocks.objects.blocks",
+              "blocks.objects.blocks.block_type",
+              "blocks.objects.blocks.section_text",
+              "blocks.objects.blocks.image_url",
+              "blocks.objects.blocks.alt_text",
+              "blocks.objects.blocks.button_title",
+              "blocks.objects.blocks.url",
+              "blocks.objects.blocks.bot_command",
+              "blocks.objects.blocks.params",
+              "blocks.objects.blocks.style",
+              "blocks.objects.blocks.attachment_fields",
+              "blocks.objects.blocks.attachment_fields.value",
+              "blocks.objects.blocks.placeholder_text",
+              "blocks.objects.blocks.menu_type",
+              "blocks.objects.blocks.dynamic_menu_recipe",
+              "blocks.objects.blocks.field_name",
+              "blocks.objects.blocks.options",
+              "blocks.objects.blocks.options.title",
+              "blocks.objects.blocks.options.bot_command",
+              "blocks.objects.blocks.options.params",
+              "blocks.objects.blocks.options.init_value",
+              "blocks.objects.blocks.init_option",
+              "blocks.objects.blocks.initial_date",
+              "blocks.objects.blocks.image_title",
+              "blocks.objects.blocks.elements",
+              "blocks.objects.blocks.elements.type",
+              "blocks.objects.blocks.elements.text",
+              "blocks.objects.blocks.elements.image_url",
+              "blocks.objects.blocks.elements.alt_text",
+              "blocks.objects.blocks.actions",
+              "blocks.objects.blocks.actions.type",
+              "blocks.objects.blocks.actions.button_title",
+              "blocks.objects.blocks.actions.url",
+              "blocks.objects.blocks.actions.bot_command",
+              "blocks.objects.blocks.actions.params",
+              "blocks.objects.blocks.actions.style",
+              "blocks.objects.blocks.actions.placeholder_text",
+              "blocks.objects.blocks.actions.initial_date",
+              "blocks.objects.blocks.actions.field_name",
+              "blocks.objects.blocks.actions.options",
+              "blocks.objects.blocks.actions.options.params",
+              "blocks.objects.blocks.actions.menu_type",
+              "blocks.objects.blocks.actions.dynamic_menu_recipe",
+              "text",
+              "message",
+              "message.title",
+              "message.title_link",
+              "message.attachment_text",
+              "message.color",
+              "attachment_fields",
+              "attachment_buttons",
+              "attachment_items.message.title",
+              "attachment_items.message.title_link",
+              "attachment_items.message.attachment_text",
+              "attachment_items.message.color",
+              "attachment_items.attachment_fields",
+              "attachment_items.attachment_buttons",
+              "advanced.ts",
+              "attachment_fields.title",
+              "attachment_fields.value"
+            ],
+            "comment": "Notify user of the success.",
+            "uuid": "90f55bef-0054-4abb-87ea-9d5a1d0df012"
+          },
+          {
+            "number": 17,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "present",
+                  "lhs": "#{_('data.workato_recipe_function.2efd93e9.parameters.reviewer_slack')}",
+                  "rhs": "",
+                  "uuid": "condition-341317b3-c737-4809-b37e-1d2bf03a6b52"
+                },
+                {
+                  "operand": "not_equals_to",
+                  "lhs": "#{_('data.workato_recipe_function.2efd93e9.parameters.reviewer_slack')}",
+                  "rhs": "NA",
+                  "uuid": "condition-7fd8d79c-7e67-423c-8180-db0b0e7dc0d8"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 18,
+                "provider": "slack_bot",
+                "name": "post_bot_message",
+                "as": "c125fa17",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "channel": true,
+                  "message.color": true
+                },
+                "input": {
+                  "channel": "@#{_('data.workato_recipe_function.2efd93e9.parameters.reviewer_slack')}",
+                  "message": {
+                    "title": ":wave: New PR assigned",
+                    "attachment_text": "New PR <#{_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.pull_request_url')}|##{_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.pull_request_number')}> is assigned to you for review. Once the PR is approved, new release will be created and deployed (if CD is selected) and notified.",
+                    "color": "good"
+                  },
+                  "attachment_fields": [
+                    {
+                      "title": "Project name",
+                      "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.project_name')}"
+                    },
+                    {
+                      "title": "Release type",
+                      "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_type')}"
+                    },
+                    {
+                      "title": "Continuous delivery",
+                      "value": "=_('data.workato_recipe_function.2efd93e9.parameters.continuous_delivery').capitalize"
+                    },
+                    {
+                      "title": "Release mode",
+                      "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_mode')}"
+                    },
+                    {
+                      "title": "Requested by",
+                      "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.commiter_name')}"
+                    },
+                    {
+                      "title": "Reference",
+                      "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_reference')}"
+                    },
+                    {
+                      "title": "Release log",
+                      "value": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_message')}"
+                    },
+                    {
+                      "value": "<#{_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.pull_request_url')}|Start review>",
+                      "title": "Pull request"
+                    }
+                  ]
+                },
+                "visible_config_fields": [
+                  "channel",
+                  "blocks",
+                  "blocks.block_type",
+                  "blocks.section_text",
+                  "blocks.image_url",
+                  "blocks.alt_text",
+                  "blocks.button_title",
+                  "blocks.url",
+                  "blocks.bot_command",
+                  "blocks.params",
+                  "blocks.style",
+                  "blocks.attachment_fields",
+                  "blocks.attachment_fields.value",
+                  "blocks.placeholder_text",
+                  "blocks.menu_type",
+                  "blocks.dynamic_menu_recipe",
+                  "blocks.field_name",
+                  "blocks.options",
+                  "blocks.options.title",
+                  "blocks.options.bot_command",
+                  "blocks.options.params",
+                  "blocks.options.init_value",
+                  "blocks.init_option",
+                  "blocks.initial_date",
+                  "blocks.options.value",
+                  "blocks.init_options",
+                  "blocks.image_title",
+                  "blocks.external_id",
+                  "blocks.elements",
+                  "blocks.elements.type",
+                  "blocks.elements.text",
+                  "blocks.elements.image_url",
+                  "blocks.elements.alt_text",
+                  "blocks.actions",
+                  "blocks.actions.type",
+                  "blocks.actions.button_title",
+                  "blocks.actions.url",
+                  "blocks.actions.bot_command",
+                  "blocks.actions.params",
+                  "blocks.actions.style",
+                  "blocks.actions.placeholder_text",
+                  "blocks.actions.initial_date",
+                  "blocks.actions.field_name",
+                  "blocks.actions.options",
+                  "blocks.actions.options.params",
+                  "blocks.actions.menu_type",
+                  "blocks.actions.dynamic_menu_recipe",
+                  "blocks.objects",
+                  "blocks.objects.blocks",
+                  "blocks.objects.blocks.block_type",
+                  "blocks.objects.blocks.section_text",
+                  "blocks.objects.blocks.image_url",
+                  "blocks.objects.blocks.alt_text",
+                  "blocks.objects.blocks.button_title",
+                  "blocks.objects.blocks.url",
+                  "blocks.objects.blocks.bot_command",
+                  "blocks.objects.blocks.params",
+                  "blocks.objects.blocks.style",
+                  "blocks.objects.blocks.attachment_fields",
+                  "blocks.objects.blocks.attachment_fields.value",
+                  "blocks.objects.blocks.placeholder_text",
+                  "blocks.objects.blocks.menu_type",
+                  "blocks.objects.blocks.dynamic_menu_recipe",
+                  "blocks.objects.blocks.field_name",
+                  "blocks.objects.blocks.options",
+                  "blocks.objects.blocks.options.title",
+                  "blocks.objects.blocks.options.bot_command",
+                  "blocks.objects.blocks.options.params",
+                  "blocks.objects.blocks.options.init_value",
+                  "blocks.objects.blocks.init_option",
+                  "blocks.objects.blocks.initial_date",
+                  "blocks.objects.blocks.image_title",
+                  "blocks.objects.blocks.elements",
+                  "blocks.objects.blocks.elements.type",
+                  "blocks.objects.blocks.elements.text",
+                  "blocks.objects.blocks.elements.image_url",
+                  "blocks.objects.blocks.elements.alt_text",
+                  "blocks.objects.blocks.actions",
+                  "blocks.objects.blocks.actions.type",
+                  "blocks.objects.blocks.actions.button_title",
+                  "blocks.objects.blocks.actions.url",
+                  "blocks.objects.blocks.actions.bot_command",
+                  "blocks.objects.blocks.actions.params",
+                  "blocks.objects.blocks.actions.style",
+                  "blocks.objects.blocks.actions.placeholder_text",
+                  "blocks.objects.blocks.actions.initial_date",
+                  "blocks.objects.blocks.actions.field_name",
+                  "blocks.objects.blocks.actions.options",
+                  "blocks.objects.blocks.actions.options.params",
+                  "blocks.objects.blocks.actions.menu_type",
+                  "blocks.objects.blocks.actions.dynamic_menu_recipe",
+                  "text",
+                  "message",
+                  "message.title",
+                  "message.title_link",
+                  "message.attachment_text",
+                  "message.color",
+                  "attachment_fields",
+                  "attachment_buttons",
+                  "attachment_items.message.title",
+                  "attachment_items.message.title_link",
+                  "attachment_items.message.attachment_text",
+                  "attachment_items.message.color",
+                  "attachment_items.attachment_fields",
+                  "attachment_items.attachment_buttons",
+                  "advanced.ts",
+                  "attachment_fields.title",
+                  "attachment_fields.value",
+                  "attachment_buttons.title",
+                  "attachment_buttons.bot_command"
+                ],
+                "comment": "Notify reviewer the pull request details.",
+                "uuid": "ed4c7703-e437-47a3-b8bb-bbaf77836d4a"
+              }
+            ],
+            "uuid": "06e9a889-06c4-4d78-9795-cc9797bbdce6"
+          },
+          {
+            "number": 19,
+            "provider": "lookup_table",
+            "name": "add_entry",
+            "as": "2f49da35",
+            "title": null,
+            "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">CICD | Audit logs</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "[CICD] Audit logs"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "lookup_table_id": {
+                "zip_name": "cicd_audit_logs.lookup_table.json",
+                "name": "CICD | Audit logs",
+                "folder": ""
+              },
+              "parameters": {
+                "col1": "#{_('data.workato_recipe_function.2efd93e9.parameters.id')}",
+                "col2": "#{_('data.workato_recipe_function.2efd93e9.parameters.project_name')}",
+                "col3": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_reference')}",
+                "col4": "Review release",
+                "col5": "Dev",
+                "col6": "NA",
+                "col7": "Success",
+                "col8": "#{_('data.workato_recipe_function.2efd93e9.parameters.commiter_name')}",
+                "col9": "pr_number: #{_('data.cicd_for_git_hub_connector_1096414_1685367513.dcc5fc61.pull_request_number')}\nrelease_log: #{_('data.workato_recipe_function.2efd93e9.parameters.release_message')}\nrelease_mode: #{_('data.workato_recipe_function.2efd93e9.parameters.release_mode')}\npackage_id: #{_('data.workato_variable.d7744099.package_id')}\nrepo: #{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}",
+                "col10": "=now"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "control_type": "number",
+                "label": "Entry ID",
+                "name": "id",
+                "parse_output": "integer_conversion",
+                "type": "integer"
+              },
+              {
+                "label": "Entry",
+                "name": "entry",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project ID",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Refs",
+                    "name": "col3",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Operation",
+                    "name": "col4",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Environment",
+                    "name": "col5",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Version",
+                    "name": "col6",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "name": "col7",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Requester",
+                    "name": "col8",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Details",
+                    "name": "col9",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Timestamp",
+                    "name": "col10",
+                    "type": "string",
+                    "sticky": true
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "hint": "Fill the fields for the new entry",
+                "label": "Entry fields",
+                "name": "parameters",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project ID",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Refs",
+                    "name": "col3",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Operation",
+                    "name": "col4",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Environment",
+                    "name": "col5",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Version",
+                    "name": "col6",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "name": "col7",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Requester",
+                    "name": "col8",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Details",
+                    "name": "col9",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Timestamp",
+                    "name": "col10",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "uuid": "2c2b01eb-09e6-4d98-a5d6-2e6d7b866a13"
+          },
+          {
+            "number": 20,
+            "as": "9b71c0ae",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+              {
+                "number": 21,
+                "provider": "slack_bot",
+                "name": "post_bot_message",
+                "as": "9d01891a",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "channel": true,
+                  "message.color": true
+                },
+                "input": {
+                  "channel": "#{_('data.workato_recipe_function.2efd93e9.parameters.channel_id')}",
+                  "message": {
+                    "title": ":warning: Error creating release",
+                    "title_link": "#{_('data.workato.job_context.job_url')}",
+                    "attachment_text": "#{_('data.catch.9b71c0ae.message')}",
+                    "color": "danger"
+                  }
+                },
+                "comment": "Notify error message to user.",
+                "uuid": "7d68b387-9c6d-4279-8ddb-8cd0d66f5d8a"
+              },
+              {
+                "number": 22,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "a839aafb",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">CICD | Audit logs</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "[CICD] Audit logs"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "cicd_audit_logs.lookup_table.json",
+                    "name": "CICD | Audit logs",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "#{_('data.workato_recipe_function.2efd93e9.parameters.id')}",
+                    "col2": "#{_('data.workato_recipe_function.2efd93e9.parameters.project_name')}",
+                    "col3": "#{_('data.workato_recipe_function.2efd93e9.parameters.release_reference')}",
+                    "col4": "Review release",
+                    "col5": "Dev",
+                    "col6": "NA",
+                    "col7": "Failed",
+                    "col8": "#{_('data.workato_recipe_function.2efd93e9.parameters.commiter_email')}",
+                    "col9": "error: #{_('data.catch.9b71c0ae.message')}\nrelease_log: #{_('data.workato_recipe_function.2efd93e9.parameters.release_message')}\nrelease_mode: #{_('data.workato_recipe_function.2efd93e9.parameters.release_mode')}\nrepo: #{_('data.workato_recipe_function.2efd93e9.parameters.github_repo')}",
+                    "col10": "=now"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "name": "id",
+                    "parse_output": "integer_conversion",
+                    "type": "integer"
+                  },
+                  {
+                    "label": "Entry",
+                    "name": "entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project ID",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Refs",
+                        "name": "col3",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "name": "col4",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Environment",
+                        "name": "col5",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Version",
+                        "name": "col6",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Status",
+                        "name": "col7",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Requester",
+                        "name": "col8",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Details",
+                        "name": "col9",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Timestamp",
+                        "name": "col10",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "hint": "Fill the fields for the new entry",
+                    "label": "Entry fields",
+                    "name": "parameters",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project ID",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Refs",
+                        "name": "col3",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "name": "col4",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Environment",
+                        "name": "col5",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Version",
+                        "name": "col6",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Status",
+                        "name": "col7",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Requester",
+                        "name": "col8",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Details",
+                        "name": "col9",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Timestamp",
+                        "name": "col10",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "uuid": "15a5f523-8e07-4693-922c-2e6e1117c831"
+              }
+            ],
+            "uuid": "375520aa-4b69-4f09-9fe4-a756dd7532db"
+          }
+        ],
+        "uuid": "1a40af45-1c10-4d8d-ae2e-2bfcd0371032"
+      }
+    ],
+    "comment": "Recipe to export the manifest in the development environment and commit the package to a new GitHub branch to create a pull request.",
+    "uuid": "85e00118-16f5-4f60-9a73-9d7a39a0d256"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "slack_bot",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/ci_cd_connector_for_slack.connection.json",
+        "name": "CI CD Connector for Slack",
+        "folder": "CICD_Automation/Connections"
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "cicd_for_workato_connector_1096414_1685367514",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/cicd_conn_workato.connection.json",
+        "name": "CICD | CONN | Workato",
+        "folder": "CICD_Automation/Connections",
+        "custom": true
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "cicd_for_git_hub_connector_1096414_1685367513",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/cicd_conn_github.connection.json",
+        "name": "CICD | CONN | GitHub",
+        "folder": "CICD_Automation/Connections",
+        "custom": true
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "file_connector",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

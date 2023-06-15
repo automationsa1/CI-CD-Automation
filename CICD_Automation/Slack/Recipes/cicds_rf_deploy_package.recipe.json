@@ -1,0 +1,1380 @@
+{
+  "name": "CICDS | RF | Deploy package",
+  "description": "When there is a function call, do action",
+  "version": 14,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "b8143a76",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"control_type\":\"text\",\"label\":\"ID\",\"name\":\"id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Environment\",\"name\":\"environment\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Project name\",\"name\":\"project_name\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"GitHub repository\",\"name\":\"github_repository\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Folder ID\",\"name\":\"folder_id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Folder name\",\"name\":\"folder_name\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release version\",\"name\":\"release_version\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Package ID\",\"name\":\"package_id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Deployment comments\",\"name\":\"ideployment_comments\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Channel ID\",\"name\":\"channel_id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Requester\",\"name\":\"requester\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release refs\",\"name\":\"release_refs\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Release mode\",\"name\":\"release_mode\",\"type\":\"string\",\"optional\":false}]"
+    },
+    "extended_output_schema": [
+      {
+        "label": "Parameters",
+        "name": "parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "ID",
+            "name": "id",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Environment",
+            "name": "environment",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Project name",
+            "name": "project_name",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "GitHub repository",
+            "name": "github_repository",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Folder ID",
+            "name": "folder_id",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Folder name",
+            "name": "folder_name",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release version",
+            "name": "release_version",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Package ID",
+            "name": "package_id",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Deployment comments",
+            "name": "ideployment_comments",
+            "type": "string",
+            "optional": true
+          },
+          {
+            "control_type": "text",
+            "label": "Channel ID",
+            "name": "channel_id",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Requester",
+            "name": "requester",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release refs",
+            "name": "release_refs",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Release mode",
+            "name": "release_mode",
+            "type": "string",
+            "optional": false
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "equals_to",
+                  "lhs": "#{_('data.workato_recipe_function.b8143a76.parameters.environment')}",
+                  "rhs": "test",
+                  "uuid": "condition-5539ce9c-013c-444b-8ab6-ab507c2292d3"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 3,
+                "keyword": "if",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "type": "compound",
+                  "operand": "and",
+                  "conditions": [
+                    {
+                      "operand": "equals_to",
+                      "lhs": "#{_('data.workato_recipe_function.b8143a76.parameters.release_mode')}",
+                      "rhs": "full",
+                      "uuid": "condition-b1446c6e-8c33-4406-bcef-f9e6a5360362"
+                    }
+                  ]
+                },
+                "block": [
+                  {
+                    "number": 4,
+                    "provider": "workato_recipe_function",
+                    "name": "call_recipe",
+                    "as": "67b8ea9f",
+                    "title": null,
+                    "description": "Call <span class=\"provider\">Build Project and Get Status of Build</span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "flow_id": "Build Project and Get Status of Build"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "flow_id": {
+                        "zip_name": "CICD_Automation/Slack/Recipes/cicds_rf_build_project_and_get_status_of_build.recipe.json",
+                        "name": "CICDS | RF | Build Project and Get Status of Build",
+                        "folder": "CICD_Automation/Slack/Recipes"
+                      }
+                    },
+                    "extended_output_schema": [
+                      {
+                        "label": "Result",
+                        "name": "result",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "State",
+                            "name": "state",
+                            "type": "string",
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "ID",
+                            "name": "id",
+                            "type": "string",
+                            "optional": false
+                          }
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "uuid": "67320208-9635-4453-996c-336db804a813"
+                  },
+                  {
+                    "number": 5,
+                    "provider": "cicd_for_workato_connector_1096414_1685367514",
+                    "name": "deploy_package",
+                    "as": "ae120496",
+                    "title": null,
+                    "description": "Deploy <span class=\"provider\">package</span> to Workato <span class=\"provider\"></span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "api_mode": "Projects",
+                      "env_type": "Test",
+                      "workato_environment": "DEV"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "api_mode": "projects",
+                      "id": "#{_('data.workato_recipe_function.67b8ea9f.result.id')}",
+                      "env_type": "test",
+                      "description": "release_version: #{_('data.workato_recipe_function.b8143a76.parameters.release_version')}\ncicd_action:  Deploy release\nrelease_log: #{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}\nrelease_refs: #{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}\nreleased_by: #{_('data.workato_recipe_function.b8143a76.parameters.requester')}"
+                    },
+                    "extended_input_schema": [
+                      {
+                        "control_type": "select",
+                        "label": "Workato APIs",
+                        "name": "api_mode",
+                        "optional": false,
+                        "pick_list": "api_mode",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Package or build ID to deploy.",
+                        "label": "ID",
+                        "name": "id",
+                        "optional": false,
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "select",
+                        "hint": "Select environment.",
+                        "label": "Workato environment",
+                        "name": "workato_environment",
+                        "ngIf": "input.api_mode == 'rlcm'",
+                        "optional": true,
+                        "pick_list": "environments",
+                        "toggle_field": {
+                          "name": "workato_environment",
+                          "label": "Workato environment",
+                          "type": "string",
+                          "control_type": "text",
+                          "optional": true,
+                          "toggle_hint": "Custom value"
+                        },
+                        "toggle_hint": "Select from list",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Target environment folder ID to import package into.",
+                        "label": "Folder ID",
+                        "name": "folder_id",
+                        "ngIf": "input.api_mode == 'rlcm'",
+                        "optional": true,
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "select",
+                        "hint": "Target environment type. Projects API currently supports only test and prod values.",
+                        "label": "Environment type",
+                        "name": "env_type",
+                        "ngIf": "input.api_mode == 'projects'",
+                        "optional": true,
+                        "pick_list": "target_environment_types",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Deployment description for documentation.",
+                        "label": "Description",
+                        "name": "description",
+                        "ngIf": "input.api_mode == 'projects'",
+                        "optional": true,
+                        "type": "string"
+                      }
+                    ],
+                    "visible_config_fields": [
+                      "api_mode",
+                      "id",
+                      "env_type",
+                      "description"
+                    ],
+                    "comment": "Download and deploy build to TEST environment.",
+                    "uuid": "d9b1d005-a14b-4d9f-acc4-1705a2db79e5"
+                  },
+                  {
+                    "number": 6,
+                    "keyword": "else",
+                    "dynamicPickListSelection": {
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                    },
+                    "block": [
+                      {
+                        "number": 7,
+                        "provider": "workato_recipe_function",
+                        "name": "call_recipe",
+                        "as": "b67c81ad",
+                        "title": null,
+                        "description": "Call <span class=\"provider\">Build Project and Get Status of Build</span>",
+                        "keyword": "action",
+                        "dynamicPickListSelection": {
+                          "flow_id": "Build Project and Get Status of Build"
+                        },
+                        "toggleCfg": {
+                        },
+                        "input": {
+                          "flow_id": {
+                            "zip_name": "CICD_Automation/Slack/Recipes/cicds_rf_build_project_and_get_status_of_build.recipe.json",
+                            "name": "CICDS | RF | Build Project and Get Status of Build",
+                            "folder": "CICD_Automation/Slack/Recipes"
+                          }
+                        },
+                        "extended_output_schema": [
+                          {
+                            "label": "Result",
+                            "name": "result",
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "State",
+                                "name": "state",
+                                "type": "string",
+                                "optional": false
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "ID",
+                                "name": "id",
+                                "type": "string",
+                                "optional": false
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "uuid": "891e56e4-3d18-473b-8658-a042c86baa8c"
+                      },
+                      {
+                        "number": 8,
+                        "provider": "cicd_for_workato_connector_1096414_1685367514",
+                        "name": "deploy_package",
+                        "as": "ab53447a",
+                        "title": null,
+                        "description": "Deploy <span class=\"provider\">package</span> to Workato <span class=\"provider\">TEST</span>",
+                        "keyword": "action",
+                        "dynamicPickListSelection": {
+                          "api_mode": "Recipe Lifecycle Management",
+                          "workato_src_environment": "DEV",
+                          "workato_environment": "TEST"
+                        },
+                        "toggleCfg": {
+                          "workato_environment": false
+                        },
+                        "input": {
+                          "folder_id": "#{_('data.workato_recipe_function.b8143a76.parameters.folder_id')}",
+                          "api_mode": "rlcm",
+                          "id": "#{_('data.workato_recipe_function.b8143a76.parameters.package_id')}",
+                          "workato_environment": "TEST"
+                        },
+                        "extended_input_schema": [
+                          {
+                            "control_type": "select",
+                            "label": "Workato APIs",
+                            "name": "api_mode",
+                            "optional": false,
+                            "pick_list": "api_mode",
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "hint": "Package or build ID to deploy.",
+                            "label": "ID",
+                            "name": "id",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "select",
+                            "hint": "Select environment.",
+                            "label": "Workato environment",
+                            "name": "workato_environment",
+                            "ngIf": "input.api_mode == 'rlcm'",
+                            "optional": true,
+                            "pick_list": "environments",
+                            "toggle_field": {
+                              "name": "workato_environment",
+                              "label": "Workato environment",
+                              "type": "string",
+                              "control_type": "text",
+                              "optional": true,
+                              "toggle_hint": "Custom value"
+                            },
+                            "toggle_hint": "Select from list",
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "hint": "Target environment folder ID to import package into.",
+                            "label": "Folder ID",
+                            "name": "folder_id",
+                            "ngIf": "input.api_mode == 'rlcm'",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "select",
+                            "hint": "Target environment type. Projects API currently supports only test and prod values.",
+                            "label": "Environment type",
+                            "name": "env_type",
+                            "ngIf": "input.api_mode == 'projects'",
+                            "optional": true,
+                            "pick_list": "target_environment_types",
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "hint": "Deployment description for documentation.",
+                            "label": "Description",
+                            "name": "description",
+                            "ngIf": "input.api_mode == 'projects'",
+                            "optional": true,
+                            "type": "string"
+                          }
+                        ],
+                        "comment": "Download and import package to TEST environment.",
+                        "uuid": "6594adec-e233-43a8-8032-0fcc069fb0dc"
+                      }
+                    ],
+                    "comment": "...else use RLCM API to import manifest in target folder.",
+                    "uuid": "37f67490-1b88-4ba7-94fe-89d3b1fe43fe"
+                  }
+                ],
+                "comment": "If using the new projects API for full release mode...",
+                "uuid": "a9fdb10c-4535-4d6d-9818-3b49d3919b98"
+              }
+            ],
+            "uuid": "c8deb653-2f60-4f75-a47b-549d1fa538ef"
+          },
+          {
+            "number": 9,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "equals_to",
+                  "lhs": "#{_('data.workato_recipe_function.b8143a76.parameters.environment')}",
+                  "rhs": "prod",
+                  "uuid": "condition-5539ce9c-013c-444b-8ab6-ab507c2292d3"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 10,
+                "keyword": "if",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "type": "compound",
+                  "operand": "and",
+                  "conditions": [
+                    {
+                      "operand": "equals_to",
+                      "lhs": "#{_('data.workato_recipe_function.b8143a76.parameters.release_mode')}",
+                      "rhs": "full",
+                      "uuid": "condition-b1446c6e-8c33-4406-bcef-f9e6a5360362"
+                    }
+                  ]
+                },
+                "block": [
+                  {
+                    "number": 11,
+                    "provider": "cicd_for_workato_connector_1096414_1685367514",
+                    "name": "deploy_package",
+                    "as": "6262abe5",
+                    "title": null,
+                    "description": "Deploy <span class=\"provider\">package</span> to Workato <span class=\"provider\"></span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "api_mode": "Projects",
+                      "env_type": "Production"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "api_mode": "projects",
+                      "id": "#{_('data.workato_recipe_function.b8143a76.parameters.package_id')}",
+                      "env_type": "prod",
+                      "description": "release_version: #{_('data.workato_recipe_function.b8143a76.parameters.release_version')}\ncicd_action:  Deploy release\nrelease_log: #{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}\nrelease_refs: #{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}\nreleased_by: #{_('data.workato_recipe_function.b8143a76.parameters.requester')}"
+                    },
+                    "extended_input_schema": [
+                      {
+                        "control_type": "select",
+                        "label": "Workato APIs",
+                        "name": "api_mode",
+                        "optional": false,
+                        "pick_list": "api_mode",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Package or build ID to deploy.",
+                        "label": "ID",
+                        "name": "id",
+                        "optional": false,
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "select",
+                        "hint": "Select environment.",
+                        "label": "Workato environment",
+                        "name": "workato_environment",
+                        "ngIf": "input.api_mode == 'rlcm'",
+                        "optional": true,
+                        "pick_list": "environments",
+                        "toggle_field": {
+                          "name": "workato_environment",
+                          "label": "Workato environment",
+                          "type": "string",
+                          "control_type": "text",
+                          "optional": true,
+                          "toggle_hint": "Custom value"
+                        },
+                        "toggle_hint": "Select from list",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Target environment folder ID to import package into.",
+                        "label": "Folder ID",
+                        "name": "folder_id",
+                        "ngIf": "input.api_mode == 'rlcm'",
+                        "optional": true,
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "select",
+                        "hint": "Target environment type. Projects API currently supports only test and prod values.",
+                        "label": "Environment type",
+                        "name": "env_type",
+                        "ngIf": "input.api_mode == 'projects'",
+                        "optional": true,
+                        "pick_list": "target_environment_types",
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "hint": "Deployment description for documentation.",
+                        "label": "Description",
+                        "name": "description",
+                        "ngIf": "input.api_mode == 'projects'",
+                        "optional": true,
+                        "type": "string"
+                      }
+                    ],
+                    "comment": "Download and deploy build to PROD environment.",
+                    "uuid": "c05dffd1-bfd3-4192-bd69-0ff7b51edd7a"
+                  },
+                  {
+                    "number": 12,
+                    "keyword": "else",
+                    "dynamicPickListSelection": {
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                    },
+                    "block": [
+                      {
+                        "number": 13,
+                        "provider": "cicd_for_workato_connector_1096414_1685367514",
+                        "name": "deploy_package",
+                        "as": "d1adca9c",
+                        "title": null,
+                        "description": "Deploy <span class=\"provider\">package</span> to Workato <span class=\"provider\">PROD</span>",
+                        "keyword": "action",
+                        "dynamicPickListSelection": {
+                          "api_mode": "Recipe Lifecycle Management",
+                          "workato_src_environment": "DEV",
+                          "workato_environment": "PROD"
+                        },
+                        "toggleCfg": {
+                          "workato_environment": false
+                        },
+                        "input": {
+                          "folder_id": "#{_('data.workato_recipe_function.b8143a76.parameters.folder_id')}",
+                          "api_mode": "rlcm",
+                          "id": "#{_('data.workato_recipe_function.b8143a76.parameters.package_id')}",
+                          "workato_environment": "PROD"
+                        },
+                        "extended_input_schema": [
+                          {
+                            "control_type": "select",
+                            "label": "Workato APIs",
+                            "name": "api_mode",
+                            "optional": false,
+                            "pick_list": "api_mode",
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "hint": "Package or build ID to deploy.",
+                            "label": "ID",
+                            "name": "id",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "select",
+                            "hint": "Select environment.",
+                            "label": "Workato environment",
+                            "name": "workato_environment",
+                            "ngIf": "input.api_mode == 'rlcm'",
+                            "optional": true,
+                            "pick_list": "environments",
+                            "toggle_field": {
+                              "name": "workato_environment",
+                              "label": "Workato environment",
+                              "type": "string",
+                              "control_type": "text",
+                              "optional": true,
+                              "toggle_hint": "Custom value"
+                            },
+                            "toggle_hint": "Select from list",
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "hint": "Target environment folder ID to import package into.",
+                            "label": "Folder ID",
+                            "name": "folder_id",
+                            "ngIf": "input.api_mode == 'rlcm'",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "select",
+                            "hint": "Target environment type. Projects API currently supports only test and prod values.",
+                            "label": "Environment type",
+                            "name": "env_type",
+                            "ngIf": "input.api_mode == 'projects'",
+                            "optional": true,
+                            "pick_list": "target_environment_types",
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "hint": "Deployment description for documentation.",
+                            "label": "Description",
+                            "name": "description",
+                            "ngIf": "input.api_mode == 'projects'",
+                            "optional": true,
+                            "type": "string"
+                          }
+                        ],
+                        "comment": "Download and import package to PROD environment.",
+                        "uuid": "9ea1b69b-4928-4814-b6dd-ad660d37d43f"
+                      }
+                    ],
+                    "comment": "...else use RLCM API to import manifest in target folder.",
+                    "uuid": "257cccf3-0085-4985-974c-6128f2ef3a6a"
+                  }
+                ],
+                "comment": "If using the new projects API for full release mode...",
+                "uuid": "28e77e7b-ddef-451b-9fbf-0642b1c6d2cb"
+              }
+            ],
+            "uuid": "0cd9062b-583f-4cae-9e49-8912d682e827"
+          },
+          {
+            "number": 14,
+            "provider": "slack_bot",
+            "name": "post_bot_message",
+            "as": "72add144",
+            "title": null,
+            "description": "Post <span class=\"provider\">message</span> as <span class=\"provider\">Slack Workbot</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "channel": "general"
+            },
+            "toggleCfg": {
+              "channel": true,
+              "message.color": true
+            },
+            "input": {
+              "message": {
+                "title": ":rocket: Release deployed",
+                "attachment_text": "Release was deployed successfully.",
+                "color": "good"
+              },
+              "attachment_fields": [
+                {
+                  "title": "Project name",
+                  "value": "#{_('data.workato_recipe_function.b8143a76.parameters.project_name')}"
+                },
+                {
+                  "title": "ID",
+                  "value": "#{_('data.workato_recipe_function.b8143a76.parameters.id')}"
+                },
+                {
+                  "title": "Release version",
+                  "value": "#{_('data.workato_recipe_function.b8143a76.parameters.release_version')}"
+                },
+                {
+                  "title": "Package ID",
+                  "value": "#{_('data.workato_recipe_function.b8143a76.parameters.package_id')}"
+                },
+                {
+                  "title": "Environment",
+                  "value": "=_('data.workato_recipe_function.b8143a76.parameters.environment').upcase"
+                },
+                {
+                  "title": "Release mode",
+                  "value": "=_('data.workato_recipe_function.b8143a76.parameters.release_mode').capitalize"
+                },
+                {
+                  "title": "Comments",
+                  "value": "#{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}"
+                },
+                {
+                  "title": "Reference",
+                  "value": "#{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}"
+                }
+              ],
+              "channel": "#{_('data.workato_recipe_function.b8143a76.parameters.channel_id')}"
+            },
+            "visible_config_fields": [
+              "blocks",
+              "blocks.block_type",
+              "blocks.section_text",
+              "blocks.image_url",
+              "blocks.alt_text",
+              "blocks.button_title",
+              "blocks.url",
+              "blocks.bot_command",
+              "blocks.params",
+              "blocks.style",
+              "blocks.attachment_fields",
+              "blocks.attachment_fields.value",
+              "blocks.placeholder_text",
+              "blocks.menu_type",
+              "blocks.dynamic_menu_recipe",
+              "blocks.field_name",
+              "blocks.options",
+              "blocks.options.title",
+              "blocks.options.bot_command",
+              "blocks.options.params",
+              "blocks.options.init_value",
+              "blocks.init_option",
+              "blocks.initial_date",
+              "blocks.options.value",
+              "blocks.init_options",
+              "blocks.image_title",
+              "blocks.external_id",
+              "blocks.elements",
+              "blocks.elements.type",
+              "blocks.elements.text",
+              "blocks.elements.image_url",
+              "blocks.elements.alt_text",
+              "blocks.actions",
+              "blocks.actions.type",
+              "blocks.actions.button_title",
+              "blocks.actions.url",
+              "blocks.actions.bot_command",
+              "blocks.actions.params",
+              "blocks.actions.style",
+              "blocks.actions.placeholder_text",
+              "blocks.actions.initial_date",
+              "blocks.actions.field_name",
+              "blocks.actions.options",
+              "blocks.actions.options.params",
+              "blocks.actions.menu_type",
+              "blocks.actions.dynamic_menu_recipe",
+              "blocks.objects",
+              "blocks.objects.blocks",
+              "blocks.objects.blocks.block_type",
+              "blocks.objects.blocks.section_text",
+              "blocks.objects.blocks.image_url",
+              "blocks.objects.blocks.alt_text",
+              "blocks.objects.blocks.button_title",
+              "blocks.objects.blocks.url",
+              "blocks.objects.blocks.bot_command",
+              "blocks.objects.blocks.params",
+              "blocks.objects.blocks.style",
+              "blocks.objects.blocks.attachment_fields",
+              "blocks.objects.blocks.attachment_fields.value",
+              "blocks.objects.blocks.placeholder_text",
+              "blocks.objects.blocks.menu_type",
+              "blocks.objects.blocks.dynamic_menu_recipe",
+              "blocks.objects.blocks.field_name",
+              "blocks.objects.blocks.options",
+              "blocks.objects.blocks.options.title",
+              "blocks.objects.blocks.options.bot_command",
+              "blocks.objects.blocks.options.params",
+              "blocks.objects.blocks.options.init_value",
+              "blocks.objects.blocks.init_option",
+              "blocks.objects.blocks.initial_date",
+              "blocks.objects.blocks.image_title",
+              "blocks.objects.blocks.elements",
+              "blocks.objects.blocks.elements.type",
+              "blocks.objects.blocks.elements.text",
+              "blocks.objects.blocks.elements.image_url",
+              "blocks.objects.blocks.elements.alt_text",
+              "blocks.objects.blocks.actions",
+              "blocks.objects.blocks.actions.type",
+              "blocks.objects.blocks.actions.button_title",
+              "blocks.objects.blocks.actions.url",
+              "blocks.objects.blocks.actions.bot_command",
+              "blocks.objects.blocks.actions.params",
+              "blocks.objects.blocks.actions.style",
+              "blocks.objects.blocks.actions.placeholder_text",
+              "blocks.objects.blocks.actions.initial_date",
+              "blocks.objects.blocks.actions.field_name",
+              "blocks.objects.blocks.actions.options",
+              "blocks.objects.blocks.actions.options.params",
+              "blocks.objects.blocks.actions.menu_type",
+              "blocks.objects.blocks.actions.dynamic_menu_recipe",
+              "text",
+              "message.title",
+              "message.title_link",
+              "message.attachment_text",
+              "message.color",
+              "attachment_fields",
+              "attachment_buttons",
+              "attachment_items.message.title",
+              "attachment_items.message.title_link",
+              "attachment_items.message.attachment_text",
+              "attachment_items.message.color",
+              "attachment_items.attachment_fields",
+              "attachment_items.attachment_buttons",
+              "advanced.ts",
+              "attachment_fields.title",
+              "attachment_fields.value"
+            ],
+            "comment": "Notify user of the success.",
+            "uuid": "126742d7-4afa-4c23-b4fc-0599018640cf"
+          },
+          {
+            "number": 15,
+            "provider": "lookup_table",
+            "name": "add_entry",
+            "as": "bad25a8c",
+            "title": null,
+            "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">CICD | Audit logs</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "[CICD] Audit logs"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "lookup_table_id": {
+                "zip_name": "cicd_audit_logs.lookup_table.json",
+                "name": "CICD | Audit logs",
+                "folder": ""
+              },
+              "parameters": {
+                "col1": "#{_('data.workato_recipe_function.b8143a76.parameters.id')}",
+                "col2": "#{_('data.workato_recipe_function.b8143a76.parameters.project_name')}",
+                "col3": "#{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}",
+                "col4": "Deploy release",
+                "col5": "=_('data.workato_recipe_function.b8143a76.parameters.environment').capitalize",
+                "col6": "#{_('data.workato_recipe_function.b8143a76.parameters.release_version')}",
+                "col7": "Success",
+                "col8": "#{_('data.workato_recipe_function.b8143a76.parameters.requester')}",
+                "col9": "release_log: #{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}\nrelease_mode: #{_('data.workato_recipe_function.b8143a76.parameters.release_mode')}\npackage_id: #{_('data.workato_recipe_function.b8143a76.parameters.package_id')}\nrepo: #{_('data.workato_recipe_function.b8143a76.parameters.github_repository')}",
+                "col10": "=now"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "control_type": "number",
+                "label": "Entry ID",
+                "name": "id",
+                "parse_output": "integer_conversion",
+                "type": "integer"
+              },
+              {
+                "label": "Entry",
+                "name": "entry",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project ID",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Refs",
+                    "name": "col3",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Operation",
+                    "name": "col4",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Environment",
+                    "name": "col5",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Version",
+                    "name": "col6",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "name": "col7",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Requester",
+                    "name": "col8",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Details",
+                    "name": "col9",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Timestamp",
+                    "name": "col10",
+                    "type": "string",
+                    "sticky": true
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "hint": "Fill the fields for the new entry",
+                "label": "Entry fields",
+                "name": "parameters",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project ID",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Refs",
+                    "name": "col3",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Operation",
+                    "name": "col4",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Environment",
+                    "name": "col5",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Version",
+                    "name": "col6",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "name": "col7",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Requester",
+                    "name": "col8",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Details",
+                    "name": "col9",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Timestamp",
+                    "name": "col10",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "uuid": "a4e66a15-8481-402a-ad62-a77db189a724"
+          },
+          {
+            "number": 16,
+            "as": "af234a6c",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+              {
+                "number": 17,
+                "provider": "slack_bot",
+                "name": "post_bot_message",
+                "as": "5d8e5bc6",
+                "title": null,
+                "description": "Post <span class=\"provider\">message</span> as <span class=\"provider\">Slack Workbot</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "channel": true,
+                  "message.color": true
+                },
+                "input": {
+                  "channel": "#{_('data.workato_recipe_function.b8143a76.parameters.channel_id')}",
+                  "message": {
+                    "title": ":warning: Error deploying release",
+                    "title_link": "#{_('data.workato.job_context.job_url')}",
+                    "attachment_text": "#{_('data.catch.af234a6c.message')}",
+                    "color": "danger"
+                  }
+                },
+                "comment": "Notify user of the error message.",
+                "uuid": "a5d821cf-138a-48c3-b92e-c7d9d597028c"
+              },
+              {
+                "number": 18,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "196ab090",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">CICD | Audit logs</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "[CICD] Audit logs"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "cicd_audit_logs.lookup_table.json",
+                    "name": "CICD | Audit logs",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "#{_('data.workato_recipe_function.b8143a76.parameters.id')}",
+                    "col2": "#{_('data.workato_recipe_function.b8143a76.parameters.project_name')}",
+                    "col3": "#{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}",
+                    "col4": "Deploye release",
+                    "col5": "=_('data.workato_recipe_function.b8143a76.parameters.environment').capitalize",
+                    "col6": "#{_('data.workato_recipe_function.b8143a76.parameters.release_version')}",
+                    "col7": "Failed",
+                    "col8": "#{_('data.workato_recipe_function.b8143a76.parameters.requester')}",
+                    "col9": "error: #{_('data.catch.af234a6c.message')}\nrelease_log: #{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}\nrelease_mode: #{_('data.workato_recipe_function.b8143a76.parameters.release_mode')}\npackage_id: #{_('data.workato_recipe_function.b8143a76.parameters.package_id')}\nrepo: #{_('data.workato_recipe_function.b8143a76.parameters.github_repository')}",
+                    "col10": "=now"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "name": "id",
+                    "parse_output": "integer_conversion",
+                    "type": "integer"
+                  },
+                  {
+                    "label": "Entry",
+                    "name": "entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project ID",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Refs",
+                        "name": "col3",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "name": "col4",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Environment",
+                        "name": "col5",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Version",
+                        "name": "col6",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Status",
+                        "name": "col7",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Requester",
+                        "name": "col8",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Details",
+                        "name": "col9",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Timestamp",
+                        "name": "col10",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "hint": "Fill the fields for the new entry",
+                    "label": "Entry fields",
+                    "name": "parameters",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project ID",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Refs",
+                        "name": "col3",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "name": "col4",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Environment",
+                        "name": "col5",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Version",
+                        "name": "col6",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Status",
+                        "name": "col7",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Requester",
+                        "name": "col8",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Details",
+                        "name": "col9",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Timestamp",
+                        "name": "col10",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "uuid": "14e3f309-a343-4aa8-98bd-cc0315fb4fb4"
+              }
+            ],
+            "uuid": "8fa4474c-3b34-4e4e-936e-c8d0934d836d"
+          }
+        ],
+        "uuid": "85fee08a-b813-4961-9540-f9918d00d05d"
+      }
+    ],
+    "comment": "Deploy existing released package to selected Workato environment.",
+    "uuid": "e508d262-8e23-45b5-b623-009d7e3d3320"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "slack_bot",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/ci_cd_connector_for_slack.connection.json",
+        "name": "CI CD Connector for Slack",
+        "folder": "CICD_Automation/Connections"
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "cicd_for_workato_connector_1096414_1685367514",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/cicd_conn_workato.connection.json",
+        "name": "CICD | CONN | Workato",
+        "folder": "CICD_Automation/Connections",
+        "custom": true
+      }
+    }
+  ]
+}

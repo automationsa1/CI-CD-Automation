@@ -1,0 +1,10 @@
+{
+  "name": "CICD | CONN | GitHub",
+  "provider": {
+    "zip_name": "cicd_for_github.custom_adapter.json",
+    "name": "CICD for GitHub",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}

@@ -1,0 +1,1036 @@
+{
+  "name": "CICDS | BOT | Submit release request",
+  "description": "When there is a new command to Slack Workbot, do action and other actions",
+  "version": 2,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "slack_bot",
+    "name": "bot_command_v2",
+    "as": "74a4cbaf",
+    "title": null,
+    "description": "New <span class=\"provider\">workato create release</span> command to <span class=\"provider\">Slack Workbot</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+      "domain": false,
+      "name": false,
+      "scope": false
+    },
+    "input": {
+      "allow_dialog": "false",
+      "domain": "workato",
+      "name": "create",
+      "scope": "release",
+      "parameters": "[\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Project name\",\n    \"name\": \"project_name\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"ID\",\n    \"name\": \"id\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"GitHub Repository\",\n    \"name\": \"github_repo\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Release type\",\n    \"name\": \"release_type\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Release message\",\n    \"name\": \"release_message\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Release reference\",\n    \"name\": \"release_reference\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Continuous delivery\",\n    \"name\": \"continuous_delivery\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Test folder name\",\n    \"name\": \"test_folder_name\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Test folder ID\",\n    \"name\": \"test_folder_id\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Reviewer username\",\n    \"name\": \"reviewer_username\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Reviewer Slack\",\n    \"name\": \"reviewer_slack\",\n    \"type\": \"string\",\n    \"optional\": true,\n    \"prompt\": \"false\"\n  },\n  {\n    \"control_type\": \"text\",\n    \"label\": \"Release mode\",\n    \"name\": \"release_mode\",\n    \"type\": \"string\",\n    \"optional\": true\n  }\n]",
+      "description": "Collects CI/CD export pipeline trigger details.",
+      "hide_from_help": "true"
+    },
+    "extended_output_schema": [
+      {
+        "label": "Parameters",
+        "name": "parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Project name",
+            "name": "project_name",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "ID",
+            "name": "id",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "GitHub Repository",
+            "name": "github_repo",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Release type",
+            "name": "release_type",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Release message",
+            "name": "release_message",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Release reference",
+            "name": "release_reference",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Continuous delivery",
+            "name": "continuous_delivery",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Test folder name",
+            "name": "test_folder_name",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Test folder ID",
+            "name": "test_folder_id",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Reviewer username",
+            "name": "reviewer_username",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Reviewer Slack",
+            "name": "reviewer_slack",
+            "type": "string",
+            "optional": true,
+            "prompt": "false"
+          },
+          {
+            "control_type": "text",
+            "label": "Release mode",
+            "name": "release_mode",
+            "type": "string",
+            "optional": true
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "visible_config_fields": [
+      "domain",
+      "name",
+      "scope",
+      "parameters",
+      "slash_command",
+      "slash_command.enable",
+      "hide_from_help",
+      "allow_dialog",
+      "description"
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "6ce759e1",
+            "title": null,
+            "description": "Call <span class=\"provider\">CICD | RF | Create configured projects list</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "CICD | RF | Create configured projects list"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "flow_id": {
+                "zip_name": "CICD_Automation/Functions/cicd_rf_create_configured_projects_list.recipe.json",
+                "name": "CICD | RF | Create configured projects list",
+                "folder": "CICD_Automation/Functions"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "label": "Result",
+                "name": "result",
+                "properties": [
+                  {
+                    "name": "projects_list",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Projects list",
+                    "optional": false,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "project_name",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "name": "id",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Mode",
+                        "name": "mode",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "uuid": "16dbc656-28e0-403a-a9b9-01a25a9d7d07"
+          },
+          {
+            "number": 3,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "equals_to",
+                  "lhs": "#{_('data.workato_recipe_function.6ce759e1.result.projects_list.first.____Size', 'list_meta', '____Size', 'data.workato_recipe_function.6ce759e1.result.projects_list')}",
+                  "rhs": "0",
+                  "uuid": "condition-a52996f2-febd-49a7-bdba-04b88c4f3376"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 4,
+                "provider": "slack_bot",
+                "name": "post_bot_reply_v2",
+                "as": "886b75b4",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "message.color": true
+                },
+                "input": {
+                  "message": {
+                    "title": ":warning: Projects not configured",
+                    "attachment_text": "Please configure projects first to create a release.",
+                    "color": "warning"
+                  }
+                },
+                "uuid": "5033ee4d-adb8-4153-89d7-a01a74bbfb52"
+              },
+              {
+                "number": 5,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "false"
+                },
+                "uuid": "eeb98e2d-bbd3-45ed-9129-30fe48fc1123"
+              }
+            ],
+            "comment": "If no projects are configured, stop the job.",
+            "uuid": "0359e4bf-1d44-4af6-972b-c2916f0d005c"
+          },
+          {
+            "number": 6,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "blank",
+                  "lhs": "#{_('data.slack_bot.74a4cbaf.parameters.id')}",
+                  "rhs": "",
+                  "uuid": "condition-c8a94c3e-89bc-4e6a-b7f7-7a7402f4023c"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 7,
+                "provider": "slack_bot",
+                "name": "block_kit_modals",
+                "as": "78d9b9fe",
+                "title": null,
+                "description": "Open a <span class=\"provider\">modal view</span> as <span class=\"provider\">Slack Workbot</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "modal_action_type": true,
+                  "view.submit_view.bot_command": false,
+                  "view.blocks.0.options.init_value": true
+                },
+                "input": {
+                  "modal_action_type": "open",
+                  "trigger_id": "#{_('data.slack_bot.74a4cbaf.context.trigger_id')}",
+                  "view": {
+                    "modal_title": "Select Project",
+                    "blocks": [
+                      {
+                        "block_type": "select_menu_input",
+                        "label_text": "Projects",
+                        "hint_text": "Select project to create a pull request and new release.",
+                        "optional": "false",
+                        "block_id": "id",
+                        "placeholder_text": "Select project",
+                        "menu_type": "static_select",
+                        "options": {
+                          "____source": "#{_('data.workato_recipe_function.6ce759e1.result.projects_list')}",
+                          "title": "#{_('data.workato_recipe_function.6ce759e1.result.projects_list.first.project_name')} (Mode: #{_('data.workato_recipe_function.6ce759e1.result.projects_list.first.mode')} release)",
+                          "value": "#{_('data.workato_recipe_function.6ce759e1.result.projects_list.first.id')}",
+                          "init_value": "false"
+                        }
+                      }
+                    ],
+                    "submit_view": {
+                      "bot_command": "workato create release",
+                      "submit_text": "Next",
+                      "close_text": "Cancel"
+                    }
+                  }
+                },
+                "comment": "Display configured projects selection menu.",
+                "uuid": "39043388-5b7b-4fc6-8224-b2edfe8478fe"
+              },
+              {
+                "number": 8,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "false"
+                },
+                "uuid": "df09d876-c6a9-4d48-b856-0b5effb2a12a"
+              }
+            ],
+            "comment": "If config_id is not present, display modal to let the user select a project for creating the release.",
+            "uuid": "6496b5cf-1c66-4704-93eb-d8a9a657b62b"
+          },
+          {
+            "number": 9,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "blank",
+                  "lhs": "#{_('data.slack_bot.74a4cbaf.parameters.release_type')}",
+                  "rhs": "",
+                  "uuid": "condition-144e94ca-33c6-4093-ab0c-bf56d97a3451"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 10,
+                "provider": "lookup_table",
+                "name": "get_entry",
+                "as": "6004dc58",
+                "title": null,
+                "description": "\n      Lookup\n      <span class=\"provider\">entry</span>\n      from\n      <span class=\"provider\">CICD | Projects configuration</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "CICD | Projects configuration"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "cicd_projects_configuration.lookup_table.json",
+                    "name": "CICD | Projects configuration",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col2": "#{_('data.slack_bot.74a4cbaf.parameters.id')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "name": "id",
+                    "parse_output": "integer_conversion",
+                    "type": "integer"
+                  },
+                  {
+                    "label": "Entry",
+                    "name": "entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Mode",
+                        "name": "col3",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "GitHub repository",
+                        "name": "col4",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Reviewer username",
+                        "name": "col5",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Reviewer notification ID",
+                        "name": "col6",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Test folder name",
+                        "name": "col7",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Test folder ID",
+                        "name": "col8",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Prod folder name",
+                        "name": "col9",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Prod folder ID",
+                        "name": "col10",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "hint": "Provide one or more entry fields to search the entry",
+                    "label": "Lookup by",
+                    "name": "parameters",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Mode",
+                        "name": "col3",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "GitHub repository",
+                        "name": "col4",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Reviewer username",
+                        "name": "col5",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Reviewer notification ID",
+                        "name": "col6",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Test folder name",
+                        "name": "col7",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Test folder ID",
+                        "name": "col8",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Prod folder name",
+                        "name": "col9",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Prod folder ID",
+                        "name": "col10",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "comment": "Lookup selected project details from lookup table to display context information.",
+                "uuid": "e22e64aa-12e7-40bd-9a51-528d1eb2522f"
+              },
+              {
+                "number": 11,
+                "provider": "slack_bot",
+                "name": "block_kit_modals",
+                "as": "d79afcd6",
+                "title": null,
+                "description": "Update a <span class=\"provider\">modal view</span> as <span class=\"provider\">Slack Workbot</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "modal_action_type": true,
+                  "view.submit_view.bot_command": false,
+                  "view.blocks.3.options.0.init_value": true,
+                  "view.blocks.3.options.1.init_value": true,
+                  "view.blocks.3.options.2.init_value": true,
+                  "view.blocks.4.options.0.init_value": true,
+                  "view.blocks.4.options.1.init_value": true
+                },
+                "input": {
+                  "modal_action_type": "update",
+                  "view_id": "#{_('data.slack_bot.74a4cbaf.context.modals.view_id')}",
+                  "view": {
+                    "modal_title": "Build and Deploy",
+                    "blocks": [
+                      {
+                        "block_type": "context",
+                        "elements": [
+                          {
+                            "type": "text",
+                            "text": "Project: #{_('data.lookup_table.6004dc58.entry.col1')}"
+                          },
+                          {
+                            "type": "text",
+                            "text": "ID: #{_('data.lookup_table.6004dc58.entry.col2')}"
+                          },
+                          {
+                            "type": "text",
+                            "text": "GitHub Repo: #{_('data.lookup_table.6004dc58.entry.col4')}"
+                          },
+                          {
+                            "type": "text",
+                            "text": "=\"Mode:\" + _('data.lookup_table.6004dc58.entry.col3').capitalize "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Test folder: #{_('data.lookup_table.6004dc58.entry.col7')}"
+                          }
+                        ]
+                      },
+                      {
+                        "block_type": "divider"
+                      },
+                      {
+                        "block_type": "plain_text_input",
+                        "label_text": "Release message",
+                        "hint_text": "Used for GitHub commit message.",
+                        "optional": "false",
+                        "block_id": "release_message",
+                        "placeholder_text": "Enter the change details."
+                      },
+                      {
+                        "block_type": "select_menu_input",
+                        "label_text": "Release type",
+                        "hint_text": "Used for semantic versioning policy.",
+                        "optional": "false",
+                        "block_id": "release_type",
+                        "placeholder_text": "Select release type",
+                        "menu_type": "static_select",
+                        "options": [
+                          {
+                            "title": "Major",
+                            "value": "major",
+                            "init_value": "false"
+                          },
+                          {
+                            "title": "Minor",
+                            "value": "minor",
+                            "init_value": "false"
+                          },
+                          {
+                            "title": "Bug-fix",
+                            "value": "fix",
+                            "init_value": "false"
+                          }
+                        ]
+                      },
+                      {
+                        "block_type": "radio_buttons_input",
+                        "label_text": "Deploy package?",
+                        "hint_text": "Select if package should be deployed to the test environment for continuous delivery.",
+                        "optional": "false",
+                        "block_id": "continuous_delivery",
+                        "options": [
+                          {
+                            "title": "Yes, deploy to TEST environment.",
+                            "value": "yes",
+                            "init_value": "false"
+                          },
+                          {
+                            "title": "No, I will deploy later.",
+                            "value": "no",
+                            "init_value": "false"
+                          }
+                        ]
+                      },
+                      {
+                        "block_type": "plain_text_input",
+                        "label_text": "Reference ID",
+                        "hint_text": "Track change request for the release.",
+                        "optional": "true",
+                        "block_id": "release_reference",
+                        "placeholder_text": "JIRA-1234"
+                      }
+                    ],
+                    "submit_view": {
+                      "bot_command": "workato create release",
+                      "params": "project_name: #{_('data.lookup_table.6004dc58.entry.col1')}, id: #{_('data.lookup_table.6004dc58.entry.col2')}, github_repo: #{_('data.lookup_table.6004dc58.entry.col4')},  reviewer_username: #{_('data.lookup_table.6004dc58.entry.col5')}, reviewer_slack: #{_('data.lookup_table.6004dc58.entry.col6')}, test_folder_name: #{_('data.lookup_table.6004dc58.entry.col7')}, test_folder_id:#{_('data.lookup_table.6004dc58.entry.col8')}, release_mode: #{_('data.lookup_table.6004dc58.entry.col3')}",
+                      "submit_text": "Submit",
+                      "close_text": "Cancel"
+                    }
+                  }
+                },
+                "comment": "Display options to select release type and comments.",
+                "uuid": "2ab5b39e-5285-4e18-9a33-068a390f74de"
+              },
+              {
+                "number": 12,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "false"
+                },
+                "uuid": "7747fdc3-d335-4a99-b8ea-4ec62b2cc475"
+              }
+            ],
+            "comment": "Once user has selected the project, display release options to the user if not present in the input.",
+            "uuid": "f0710bbb-9e50-4a4d-b6d8-de8207d8144f"
+          },
+          {
+            "number": 13,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "present",
+                  "lhs": "#{_('data.slack_bot.74a4cbaf.parameters.release_type')}",
+                  "rhs": "",
+                  "uuid": "condition-12cce45a-0943-45db-bc83-b3f150e8022d"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 14,
+                "provider": "workato_recipe_function",
+                "name": "call_recipe_async",
+                "as": "0d3dcc08",
+                "title": null,
+                "description": "Call <span class=\"provider\">CICDS | RF | Build and create pull request</span> (async)",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "flow_id": "CICDS | RF | Build and create pull request with Slack"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "flow_id": {
+                    "zip_name": "CICD_Automation/Slack/Recipes/cicds_rf_build_and_create_pull_request.recipe.json",
+                    "name": "CICDS | RF | Build and create pull request",
+                    "folder": "CICD_Automation/Slack/Recipes"
+                  },
+                  "parameters": {
+                    "project_name": "#{_('data.slack_bot.74a4cbaf.parameters.project_name')}",
+                    "id": "#{_('data.slack_bot.74a4cbaf.parameters.id')}",
+                    "github_repo": "#{_('data.slack_bot.74a4cbaf.parameters.github_repo')}",
+                    "release_type": "#{_('data.slack_bot.74a4cbaf.parameters.release_type')}",
+                    "release_message": "#{_('data.slack_bot.74a4cbaf.parameters.release_message')}",
+                    "continuous_delivery": "#{_('data.slack_bot.74a4cbaf.parameters.continuous_delivery')}",
+                    "reviewer_username": "#{_('data.slack_bot.74a4cbaf.parameters.reviewer_username')}",
+                    "reviewer_slack": "#{_('data.slack_bot.74a4cbaf.parameters.reviewer_slack')}",
+                    "commiter_name": "#{_('data.slack_bot.74a4cbaf.context.user_name')}",
+                    "commiter_email": "#{_('data.slack_bot.74a4cbaf.context.user_email')}",
+                    "channel_id": "#{_('data.slack_bot.74a4cbaf.context.channel')}",
+                    "release_mode": "#{_('data.slack_bot.74a4cbaf.parameters.release_mode')}",
+                    "test_folder_name": "#{_('data.slack_bot.74a4cbaf.parameters.test_folder_name')}",
+                    "test_folder_id": "#{_('data.slack_bot.74a4cbaf.parameters.test_folder_id')}",
+                    "release_reference": "#{_('data.slack_bot.74a4cbaf.parameters.release_reference')}"
+                  }
+                },
+                "extended_input_schema": [
+                  {
+                    "label": "Parameters",
+                    "name": "parameters",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Project name",
+                        "name": "project_name",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "name": "id",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "GitHub repository",
+                        "name": "github_repo",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Release type",
+                        "name": "release_type",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Release message",
+                        "name": "release_message",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Release reference",
+                        "name": "release_reference",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Continuous delivery",
+                        "name": "continuous_delivery",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Test folder name",
+                        "name": "test_folder_name",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Test folder ID",
+                        "name": "test_folder_id",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Reviewer username",
+                        "name": "reviewer_username",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Reviewer Slack",
+                        "name": "reviewer_slack",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Commiter name",
+                        "name": "commiter_name",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Commiter email",
+                        "name": "commiter_email",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Channel ID",
+                        "name": "channel_id",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Release mode",
+                        "name": "release_mode",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "visible_config_fields": [
+                  "flow_id",
+                  "parameters.test_folder_id",
+                  "parameters.test_folder_name",
+                  "parameters.release_reference"
+                ],
+                "comment": "Asynchronously create a job to export package and create a pull request for release details.",
+                "uuid": "2ad7bc15-98ca-4d56-a1a6-50f1027d260e"
+              },
+              {
+                "number": 15,
+                "provider": "slack_bot",
+                "name": "post_bot_reply_v2",
+                "as": "71771fbb",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "message.color": true
+                },
+                "input": {
+                  "message": {
+                    "title": ":hourglass_flowing_sand: PR creation in progress",
+                    "title_link": "#{_('data.workato_recipe_function.0d3dcc08.job_url')}",
+                    "attachment_text": "We will notify you once the pull request is created.",
+                    "color": "warning"
+                  }
+                },
+                "uuid": "fc3660d3-717e-4158-8a7f-f7e705d17060"
+              },
+              {
+                "number": 16,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "false"
+                },
+                "uuid": "77d0cb15-93a4-47b8-b5a4-ae5ebee41582"
+              }
+            ],
+            "comment": "Once both project details and release details are present in the input, pass them to the callable recipe.",
+            "uuid": "57cdc3ad-aff1-4b10-9fbd-ec94fff0a57b"
+          },
+          {
+            "number": 17,
+            "as": "bcdd3592",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+              {
+                "number": 18,
+                "provider": "slack_bot",
+                "name": "post_bot_reply_v2",
+                "as": "04930b33",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                  "message.color": true
+                },
+                "input": {
+                  "message": {
+                    "title": ":warning: Error submitting release request",
+                    "title_link": "#{_('data.workato.job_context.job_url')}",
+                    "attachment_text": "#{_('data.catch.bcdd3592.message')}",
+                    "color": "danger"
+                  }
+                },
+                "uuid": "a0601805-7e8b-44f1-ae96-a8ca27e8fa7d"
+              }
+            ],
+            "uuid": "fe92fdef-401d-4d9d-8142-b6a6e44b6a04"
+          }
+        ],
+        "uuid": "0f0cca3f-4bd0-4aa0-8574-70eb33d8f0a5"
+      }
+    ],
+    "comment": "Triggered on \"workato create release\" command to start the build and deploy pipeline.",
+    "job_report_schema": [
+      {
+        "name": "custom_column_0",
+        "label": "Project"
+      },
+      {
+        "name": "custom_column_1",
+        "label": "ID"
+      },
+      {
+        "name": "custom_column_2",
+        "label": "Reference"
+      },
+      {
+        "name": "custom_column_3",
+        "label": "Continuous Delivery"
+      }
+    ],
+    "job_report_config": {
+      "custom_column_0": "#{_('data.slack_bot.74a4cbaf.parameters.project_name')}",
+      "custom_column_1": "#{_('data.slack_bot.74a4cbaf.parameters.id')}",
+      "custom_column_2": "#{_('data.slack_bot.74a4cbaf.parameters.release_reference')}",
+      "custom_column_3": "#{_('data.slack_bot.74a4cbaf.parameters.continuous_delivery')}"
+    },
+    "uuid": "0b4c4dfe-9b59-4de0-b4ea-ae5e4f4e1bea"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "slack_bot",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/ci_cd_connector_for_slack.connection.json",
+        "name": "CI CD Connector for Slack",
+        "folder": "CICD_Automation/Connections"
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

@@ -1,0 +1,779 @@
+{
+  "name": "CICDS | RF | Build Project and Get Status of Build",
+  "description": "When there is a function call, do action and other actions",
+  "version": 31,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "0235ccda",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "result_schema_json": "[{\"name\":\"state\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\",\"label\":\"State\"},{\"name\":\"id\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\",\"label\":\"ID\"}]",
+      "parameters_schema_json": "[]"
+    },
+    "block": [
+      {
+        "number": 1,
+        "provider": "rest",
+        "name": "make_request_v2",
+        "as": "fc5e5e20",
+        "title": "Send request",
+        "description": "<span class=\"provider\">Send request</span> via <span class=\"provider\">HTTP</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "response.ignore_http_errors": true
+        },
+        "input": {
+          "request_name": "Send request",
+          "request": {
+            "method": "POST",
+            "content_type": "application/json",
+            "url": " https://www.workato.com/api/projects/4889620/build"
+          },
+          "response": {
+            "output_type": "json",
+            "expected_encoding": "UTF-8",
+            "ignore_http_errors": "false",
+            "response_schema": "[{\"control_type\":\"number\",\"label\":\"ID\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"id\"},{\"control_type\":\"text\",\"label\":\"Created at\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"created_at\"},{\"control_type\":\"text\",\"label\":\"Updated at\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"updated_at\"},{\"control_type\":\"text\",\"label\":\"Description\",\"type\":\"string\",\"name\":\"description\"},{\"control_type\":\"text\",\"label\":\"Project ID\",\"type\":\"string\",\"name\":\"project_id\"},{\"control_type\":\"text\",\"label\":\"State\",\"type\":\"string\",\"name\":\"state\"},{\"control_type\":\"text\",\"label\":\"Performed by name\",\"type\":\"string\",\"name\":\"performed_by_name\"},{\"control_type\":\"text\",\"label\":\"Download URL\",\"type\":\"string\",\"name\":\"download_url\"}]",
+            "headers_schema": "[{\"control_type\":\"text\",\"label\":\"Date\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"date\"},{\"control_type\":\"text\",\"label\":\"Content type\",\"type\":\"string\",\"name\":\"content_type\"},{\"control_type\":\"text\",\"label\":\"Transfer encoding\",\"type\":\"string\",\"name\":\"transfer_encoding\"},{\"control_type\":\"text\",\"label\":\"Connection\",\"type\":\"string\",\"name\":\"connection\"},{\"control_type\":\"text\",\"label\":\"Server\",\"type\":\"string\",\"name\":\"server\"},{\"control_type\":\"text\",\"label\":\"Vary\",\"type\":\"string\",\"name\":\"vary\"},{\"control_type\":\"text\",\"label\":\"X frame options\",\"type\":\"string\",\"name\":\"x_frame_options\"},{\"control_type\":\"text\",\"label\":\"X xss protection\",\"type\":\"string\",\"name\":\"x_xss_protection\"},{\"control_type\":\"text\",\"label\":\"X content type options\",\"type\":\"string\",\"name\":\"x_content_type_options\"},{\"control_type\":\"text\",\"label\":\"X download options\",\"type\":\"string\",\"name\":\"x_download_options\"},{\"control_type\":\"text\",\"label\":\"X permitted cross domain policies\",\"type\":\"string\",\"name\":\"x_permitted_cross_domain_policies\"},{\"control_type\":\"text\",\"label\":\"Referrer policy\",\"type\":\"string\",\"name\":\"referrer_policy\"},{\"control_type\":\"text\",\"label\":\"Cache control\",\"type\":\"string\",\"name\":\"cache_control\"},{\"control_type\":\"text\",\"label\":\"X workato version\",\"type\":\"string\",\"name\":\"x_workato_version\"},{\"control_type\":\"text\",\"label\":\"Etag\",\"type\":\"string\",\"name\":\"etag\"},{\"control_type\":\"text\",\"label\":\"X request ID\",\"type\":\"string\",\"name\":\"x_request_id\"},{\"control_type\":\"text\",\"label\":\"X runtime\",\"type\":\"string\",\"name\":\"x_runtime\"},{\"control_type\":\"text\",\"label\":\"Strict transport security\",\"type\":\"string\",\"name\":\"strict_transport_security\"},{\"control_type\":\"text\",\"label\":\"X correlation ID\",\"type\":\"string\",\"name\":\"x_correlation_id\"}]"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "label": "Headers",
+            "name": "headers",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Date",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "type": "date_time",
+                "name": "date"
+              },
+              {
+                "control_type": "text",
+                "label": "Content type",
+                "type": "string",
+                "name": "content_type"
+              },
+              {
+                "control_type": "text",
+                "label": "Transfer encoding",
+                "type": "string",
+                "name": "transfer_encoding"
+              },
+              {
+                "control_type": "text",
+                "label": "Connection",
+                "type": "string",
+                "name": "connection"
+              },
+              {
+                "control_type": "text",
+                "label": "Server",
+                "type": "string",
+                "name": "server"
+              },
+              {
+                "control_type": "text",
+                "label": "Vary",
+                "type": "string",
+                "name": "vary"
+              },
+              {
+                "control_type": "text",
+                "label": "X frame options",
+                "type": "string",
+                "name": "x_frame_options"
+              },
+              {
+                "control_type": "text",
+                "label": "X xss protection",
+                "type": "string",
+                "name": "x_xss_protection"
+              },
+              {
+                "control_type": "text",
+                "label": "X content type options",
+                "type": "string",
+                "name": "x_content_type_options"
+              },
+              {
+                "control_type": "text",
+                "label": "X download options",
+                "type": "string",
+                "name": "x_download_options"
+              },
+              {
+                "control_type": "text",
+                "label": "X permitted cross domain policies",
+                "type": "string",
+                "name": "x_permitted_cross_domain_policies"
+              },
+              {
+                "control_type": "text",
+                "label": "Referrer policy",
+                "type": "string",
+                "name": "referrer_policy"
+              },
+              {
+                "control_type": "text",
+                "label": "Cache control",
+                "type": "string",
+                "name": "cache_control"
+              },
+              {
+                "control_type": "text",
+                "label": "X workato version",
+                "type": "string",
+                "name": "x_workato_version"
+              },
+              {
+                "control_type": "text",
+                "label": "Etag",
+                "type": "string",
+                "name": "etag"
+              },
+              {
+                "control_type": "text",
+                "label": "X request ID",
+                "type": "string",
+                "name": "x_request_id"
+              },
+              {
+                "control_type": "text",
+                "label": "X runtime",
+                "type": "string",
+                "name": "x_runtime"
+              },
+              {
+                "control_type": "text",
+                "label": "Strict transport security",
+                "type": "string",
+                "name": "strict_transport_security"
+              },
+              {
+                "control_type": "text",
+                "label": "X correlation ID",
+                "type": "string",
+                "name": "x_correlation_id"
+              }
+            ],
+            "type": "object"
+          },
+          {
+            "label": "Response",
+            "name": "response",
+            "properties": [
+              {
+                "control_type": "number",
+                "label": "ID",
+                "parse_output": "float_conversion",
+                "type": "number",
+                "name": "id"
+              },
+              {
+                "control_type": "text",
+                "label": "Created at",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "type": "date_time",
+                "name": "created_at"
+              },
+              {
+                "control_type": "text",
+                "label": "Updated at",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "type": "date_time",
+                "name": "updated_at"
+              },
+              {
+                "control_type": "text",
+                "label": "Description",
+                "type": "string",
+                "name": "description"
+              },
+              {
+                "control_type": "text",
+                "label": "Project ID",
+                "type": "string",
+                "name": "project_id"
+              },
+              {
+                "control_type": "text",
+                "label": "State",
+                "type": "string",
+                "name": "state"
+              },
+              {
+                "control_type": "text",
+                "label": "Performed by name",
+                "type": "string",
+                "name": "performed_by_name"
+              },
+              {
+                "control_type": "text",
+                "label": "Download URL",
+                "type": "string",
+                "name": "download_url"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "label": "Response",
+            "name": "response",
+            "override": true,
+            "properties": [
+              {
+                "control_type": "select",
+                "label": "Response content type",
+                "pick_list": [
+                  [
+                    "Text",
+                    "rawdatatxt"
+                  ],
+                  [
+                    "Binary",
+                    "rawdata"
+                  ],
+                  [
+                    "JSON",
+                    "json"
+                  ],
+                  [
+                    "XML",
+                    "xml2"
+                  ]
+                ],
+                "hint": "Select expected format of data response type, e.g. JSON or XML. <a href=\"https://docs.workato.com/developing-connectors/http.html#response-type\" target=\"_blank\">Learn more</a>",
+                "default": "json",
+                "extends_schema": true,
+                "type": "string",
+                "name": "output_type"
+              },
+              {
+                "control_type": "select",
+                "label": "Encoding",
+                "pick_list": "supported_encodings_without_binary_global_pick_list",
+                "pick_list_connection_less": true,
+                "optional": true,
+                "default": "UTF-8",
+                "hint": "Default encoding type is set to UTF-8, and typically doesn't need to be changed. <a href=\"https://docs.workato.com/developing-connectors/http.html#response-type\" target=\"_blank\">Learn more</a>",
+                "type": "string",
+                "name": "expected_encoding"
+              },
+              {
+                "control_type": "schema-designer",
+                "label": "Response schema",
+                "sample_data_type": "json_http",
+                "extends_schema": true,
+                "empty_schema_title": "Describe all fields in your response.",
+                "optional": true,
+                "sticky": true,
+                "type": "string",
+                "name": "response_schema"
+              },
+              {
+                "control_type": "schema-designer",
+                "label": "HTTP response headers",
+                "extends_schema": true,
+                "empty_schema_title": "Describe all the response headers",
+                "optional": true,
+                "sticky": true,
+                "type": "string",
+                "name": "headers_schema"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Mark non-2xx response codes as success?",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Mark non-2xx response codes as success?",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "default": false,
+                  "hint": "If <b>yes</b>, non 2xx response codes returned will be marked as a successful action. If <b>no</b>, non 2xx response codes returned will be marked as an error.",
+                  "optional": true,
+                  "type": "boolean",
+                  "name": "ignore_http_errors"
+                },
+                "default": "false",
+                "hint": "If <b>yes</b>, non 2xx response codes returned will be marked as a successful action. If <b>no</b>, non 2xx response codes returned will be marked as an error.",
+                "optional": true,
+                "type": "boolean",
+                "name": "ignore_http_errors"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "comment": "Build a project. Get an ID and State of the build",
+        "uuid": "4cbd63aa-f80a-42b0-851a-5574e0a84c28",
+        "wizardFinished": true,
+        "skip": false
+      },
+      {
+        "number": 2,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.rest.fc5e5e20.response.state')}",
+              "rhs": "pending",
+              "uuid": "condition-b45a75d2-c10b-4a78-b085-462e4e4008e6"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 3,
+            "provider": "clock",
+            "name": "wait_for_interval",
+            "as": "5236e12a",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "interval": false
+            },
+            "input": {
+              "interval": "60"
+            },
+            "uuid": "836d0a35-da86-4667-97a6-c1718efcfa6a"
+          },
+          {
+            "number": 4,
+            "provider": "rest",
+            "name": "make_request_v2",
+            "as": "e4885a9d",
+            "title": "Send request",
+            "description": "<span class=\"provider\">Send request</span> via <span class=\"provider\">HTTP</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "response.ignore_http_errors": true
+            },
+            "input": {
+              "request_name": "Send request",
+              "request": {
+                "method": "GET",
+                "content_type": "application/json",
+                "url": " https://www.workato.com/api/project_builds/#{_('data.rest.fc5e5e20.response.id')}"
+              },
+              "response": {
+                "output_type": "json",
+                "expected_encoding": "UTF-8",
+                "ignore_http_errors": "false",
+                "response_schema": "[{\"control_type\":\"number\",\"label\":\"ID\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"id\"},{\"control_type\":\"text\",\"label\":\"Created at\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"created_at\"},{\"control_type\":\"text\",\"label\":\"Updated at\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"updated_at\"},{\"control_type\":\"text\",\"label\":\"Description\",\"type\":\"string\",\"name\":\"description\"},{\"control_type\":\"text\",\"label\":\"Project ID\",\"type\":\"string\",\"name\":\"project_id\"},{\"control_type\":\"text\",\"label\":\"State\",\"type\":\"string\",\"name\":\"state\"},{\"control_type\":\"text\",\"label\":\"Performed by name\",\"type\":\"string\",\"name\":\"performed_by_name\"},{\"control_type\":\"text\",\"label\":\"Download URL\",\"type\":\"string\",\"name\":\"download_url\"}]",
+                "headers_schema": "[{\"control_type\":\"text\",\"label\":\"Date\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"date\"},{\"control_type\":\"text\",\"label\":\"Content type\",\"type\":\"string\",\"name\":\"content_type\"},{\"control_type\":\"text\",\"label\":\"Transfer encoding\",\"type\":\"string\",\"name\":\"transfer_encoding\"},{\"control_type\":\"text\",\"label\":\"Connection\",\"type\":\"string\",\"name\":\"connection\"},{\"control_type\":\"text\",\"label\":\"Server\",\"type\":\"string\",\"name\":\"server\"},{\"control_type\":\"text\",\"label\":\"Vary\",\"type\":\"string\",\"name\":\"vary\"},{\"control_type\":\"text\",\"label\":\"X frame options\",\"type\":\"string\",\"name\":\"x_frame_options\"},{\"control_type\":\"text\",\"label\":\"X xss protection\",\"type\":\"string\",\"name\":\"x_xss_protection\"},{\"control_type\":\"text\",\"label\":\"X content type options\",\"type\":\"string\",\"name\":\"x_content_type_options\"},{\"control_type\":\"text\",\"label\":\"X download options\",\"type\":\"string\",\"name\":\"x_download_options\"},{\"control_type\":\"text\",\"label\":\"X permitted cross domain policies\",\"type\":\"string\",\"name\":\"x_permitted_cross_domain_policies\"},{\"control_type\":\"text\",\"label\":\"Referrer policy\",\"type\":\"string\",\"name\":\"referrer_policy\"},{\"control_type\":\"text\",\"label\":\"Cache control\",\"type\":\"string\",\"name\":\"cache_control\"},{\"control_type\":\"text\",\"label\":\"X workato version\",\"type\":\"string\",\"name\":\"x_workato_version\"},{\"control_type\":\"text\",\"label\":\"Etag\",\"type\":\"string\",\"name\":\"etag\"},{\"control_type\":\"text\",\"label\":\"X request ID\",\"type\":\"string\",\"name\":\"x_request_id\"},{\"control_type\":\"text\",\"label\":\"X runtime\",\"type\":\"string\",\"name\":\"x_runtime\"},{\"control_type\":\"text\",\"label\":\"Strict transport security\",\"type\":\"string\",\"name\":\"strict_transport_security\"},{\"control_type\":\"text\",\"label\":\"X correlation ID\",\"type\":\"string\",\"name\":\"x_correlation_id\"}]"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "label": "Headers",
+                "name": "headers",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Date",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "type": "date_time",
+                    "name": "date"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Content type",
+                    "type": "string",
+                    "name": "content_type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Transfer encoding",
+                    "type": "string",
+                    "name": "transfer_encoding"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Connection",
+                    "type": "string",
+                    "name": "connection"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Server",
+                    "type": "string",
+                    "name": "server"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Vary",
+                    "type": "string",
+                    "name": "vary"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X frame options",
+                    "type": "string",
+                    "name": "x_frame_options"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X xss protection",
+                    "type": "string",
+                    "name": "x_xss_protection"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X content type options",
+                    "type": "string",
+                    "name": "x_content_type_options"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X download options",
+                    "type": "string",
+                    "name": "x_download_options"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X permitted cross domain policies",
+                    "type": "string",
+                    "name": "x_permitted_cross_domain_policies"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Referrer policy",
+                    "type": "string",
+                    "name": "referrer_policy"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Cache control",
+                    "type": "string",
+                    "name": "cache_control"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X workato version",
+                    "type": "string",
+                    "name": "x_workato_version"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Etag",
+                    "type": "string",
+                    "name": "etag"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X request ID",
+                    "type": "string",
+                    "name": "x_request_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X runtime",
+                    "type": "string",
+                    "name": "x_runtime"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Strict transport security",
+                    "type": "string",
+                    "name": "strict_transport_security"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "X correlation ID",
+                    "type": "string",
+                    "name": "x_correlation_id"
+                  }
+                ],
+                "type": "object"
+              },
+              {
+                "label": "Response",
+                "name": "response",
+                "properties": [
+                  {
+                    "control_type": "number",
+                    "label": "ID",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Created at",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "type": "date_time",
+                    "name": "created_at"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Updated at",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "type": "date_time",
+                    "name": "updated_at"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Description",
+                    "type": "string",
+                    "name": "description"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Project ID",
+                    "type": "string",
+                    "name": "project_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "State",
+                    "type": "string",
+                    "name": "state"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Performed by name",
+                    "type": "string",
+                    "name": "performed_by_name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Download URL",
+                    "type": "string",
+                    "name": "download_url"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "label": "Response",
+                "name": "response",
+                "override": true,
+                "properties": [
+                  {
+                    "control_type": "select",
+                    "label": "Response content type",
+                    "pick_list": [
+                      [
+                        "Text",
+                        "rawdatatxt"
+                      ],
+                      [
+                        "Binary",
+                        "rawdata"
+                      ],
+                      [
+                        "JSON",
+                        "json"
+                      ],
+                      [
+                        "XML",
+                        "xml2"
+                      ]
+                    ],
+                    "hint": "Select expected format of data response type, e.g. JSON or XML. <a href=\"https://docs.workato.com/developing-connectors/http.html#response-type\" target=\"_blank\">Learn more</a>",
+                    "default": "json",
+                    "extends_schema": true,
+                    "type": "string",
+                    "name": "output_type"
+                  },
+                  {
+                    "control_type": "select",
+                    "label": "Encoding",
+                    "pick_list": "supported_encodings_without_binary_global_pick_list",
+                    "pick_list_connection_less": true,
+                    "optional": true,
+                    "default": "UTF-8",
+                    "hint": "Default encoding type is set to UTF-8, and typically doesn't need to be changed. <a href=\"https://docs.workato.com/developing-connectors/http.html#response-type\" target=\"_blank\">Learn more</a>",
+                    "type": "string",
+                    "name": "expected_encoding"
+                  },
+                  {
+                    "control_type": "schema-designer",
+                    "label": "Response schema",
+                    "sample_data_type": "json_http",
+                    "extends_schema": true,
+                    "empty_schema_title": "Describe all fields in your response.",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "response_schema"
+                  },
+                  {
+                    "control_type": "schema-designer",
+                    "label": "HTTP response headers",
+                    "extends_schema": true,
+                    "empty_schema_title": "Describe all the response headers",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "headers_schema"
+                  },
+                  {
+                    "control_type": "checkbox",
+                    "label": "Mark non-2xx response codes as success?",
+                    "render_input": {
+                    },
+                    "parse_output": {
+                    },
+                    "toggle_hint": "Select from option list",
+                    "toggle_field": {
+                      "label": "Mark non-2xx response codes as success?",
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "default": false,
+                      "hint": "If <b>yes</b>, non 2xx response codes returned will be marked as a successful action. If <b>no</b>, non 2xx response codes returned will be marked as an error.",
+                      "optional": true,
+                      "type": "boolean",
+                      "name": "ignore_http_errors"
+                    },
+                    "default": "false",
+                    "hint": "If <b>yes</b>, non 2xx response codes returned will be marked as a successful action. If <b>no</b>, non 2xx response codes returned will be marked as an error.",
+                    "optional": true,
+                    "type": "boolean",
+                    "name": "ignore_http_errors"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "comment": "Check the build status",
+            "uuid": "45948e01-a547-4b9d-b890-99683f848bfb",
+            "wizardFinished": true
+          }
+        ],
+        "uuid": "eac3fe98-b0f4-482e-a270-1538a526b3e2"
+      },
+      {
+        "number": 5,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "fb63f0f0",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "result": {
+            "state": "#{_('data.rest.e4885a9d.response.state')}",
+            "id": "#{_('data.rest.e4885a9d.response.id')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "State",
+                "name": "state",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "ID",
+                "name": "id",
+                "type": "string",
+                "optional": false
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "State",
+                "name": "state",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "ID",
+                "name": "id",
+                "type": "string",
+                "optional": false
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "uuid": "70a6c29f-586c-4092-9d52-74e244e27719"
+      }
+    ],
+    "uuid": "c676a844-2d9c-4b1a-893d-5b3eb95d6688"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "rest",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/cicd_http_connection.connection.json",
+        "name": "CICD HTTP Connection",
+        "folder": "CICD_Automation/Connections"
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

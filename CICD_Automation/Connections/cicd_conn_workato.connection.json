@@ -1,0 +1,10 @@
+{
+  "name": "CICD | CONN | Workato",
+  "provider": {
+    "zip_name": "cicd_for_workato.custom_adapter.json",
+    "name": "CICD for Workato",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}

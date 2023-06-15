@@ -1,0 +1,168 @@
+{
+  "name": "Create Folders List",
+  "description": "When there is a function call, do action and other actions",
+  "version": 5,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "64e877ce",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "result_schema_json": "[{\"name\":\"folders_list\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Folders list\",\"optional\":false,\"properties\":[{\"control_type\":\"text\",\"label\":\"Folder name\",\"name\":\"folder_name\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Folder ID\",\"name\":\"folder_id\",\"type\":\"string\",\"optional\":false}]}]",
+      "parameters_schema_json": "[{\"name\":\"Environment\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\",\"label\":\"Environment\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "label": "Parameters",
+        "name": "parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Environment",
+            "name": "Environment",
+            "type": "string",
+            "optional": false
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "cicd_for_workato_connector_1096414_1685367514",
+        "name": "list_folders",
+        "as": "1102dbc0",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "workato_environment": "DEV"
+        },
+        "toggleCfg": {
+          "workato_environment": true
+        },
+        "input": {
+          "page": "1",
+          "workato_environment": "DEV"
+        },
+        "uuid": "4250b411-f128-4822-89d8-77765b79144d"
+      },
+      {
+        "number": 2,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "2d1ced8d",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "result": {
+            "folders_list": {
+              "folder_name": "=_('data.cicd_for_workato_connector_1096414_1685367514.1102dbc0.folders_list.first.name')",
+              "folder_id": "#{_('data.cicd_for_workato_connector_1096414_1685367514.1102dbc0.folders_list.first.id')}",
+              "____source": "#{_('data.cicd_for_workato_connector_1096414_1685367514.1102dbc0.folders_list')}"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "name": "folders_list",
+                "type": "array",
+                "of": "object",
+                "label": "Folders list",
+                "optional": false,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Folder name",
+                    "name": "folder_name",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Folder ID",
+                    "name": "folder_id",
+                    "type": "string",
+                    "optional": false
+                  }
+                ]
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "name": "folders_list",
+                "type": "array",
+                "of": "object",
+                "label": "Folders list",
+                "optional": false,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Folder name",
+                    "name": "folder_name",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Folder ID",
+                    "name": "folder_id",
+                    "type": "string",
+                    "optional": false
+                  }
+                ]
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "uuid": "76dc62e0-c42b-4727-8f81-efaaa07bd02c"
+      }
+    ],
+    "comment": "Create and return a list of folders for the requested Workato environment.",
+    "uuid": "4666d61c-b194-4f90-b7f1-d78b184b9793"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "cicd_for_workato_connector_1096414_1685367514",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "CICD_Automation/Connections/cicd_conn_workato.connection.json",
+        "name": "CICD | CONN | Workato",
+        "folder": "CICD_Automation/Connections",
+        "custom": true
+      }
+    }
+  ]
+}

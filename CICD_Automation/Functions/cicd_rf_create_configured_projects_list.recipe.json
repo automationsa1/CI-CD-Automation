@@ -1,0 +1,260 @@
+{
+  "name": "CICD | RF | Create configured projects list",
+  "description": "When there is a function call, do action",
+  "version": 5,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "89521a1e",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "result_schema_json": "[{\"name\":\"projects_list\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Projects list\",\"optional\":false,\"properties\":[{\"control_type\":\"text\",\"label\":\"Project name\",\"name\":\"project_name\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"ID\",\"name\":\"id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Mode\",\"name\":\"mode\",\"type\":\"string\",\"optional\":false}]}]"
+    },
+    "block": [
+      {
+        "number": 1,
+        "provider": "lookup_table",
+        "name": "get_entries",
+        "as": "5125ef42",
+        "title": null,
+        "description": "\n      Get all\n      <span class=\"provider\">entries</span>\n      from\n      <span class=\"provider\">CICD | Projects configuration</span>\n      lookup table\n    ",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "lookup_table_id": "[CICD] Projects config"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "lookup_table_id": {
+            "zip_name": "cicd_projects_configuration.lookup_table.json",
+            "name": "CICD | Projects configuration",
+            "folder": ""
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "entries",
+            "label": "Entries",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "number",
+                "label": "Entry ID",
+                "parse_output": "integer_conversion",
+                "type": "integer",
+                "name": "id"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Mode",
+                    "name": "col3",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "GitHub repository",
+                    "name": "col4",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Reviewer username",
+                    "name": "col5",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Reviewer notification ID",
+                    "name": "col6",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Test folder name",
+                    "name": "col7",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Test folder ID",
+                    "name": "col8",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Prod folder name",
+                    "name": "col9",
+                    "type": "string",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Prod folder ID",
+                    "name": "col10",
+                    "type": "string",
+                    "sticky": true
+                  }
+                ],
+                "label": "Entry",
+                "type": "object",
+                "name": "entry"
+              }
+            ]
+          }
+        ],
+        "comment": "Lookup all configured projects from the lookup table.",
+        "uuid": "935f999e-865d-45a1-a579-4eb4befe16e9"
+      },
+      {
+        "number": 2,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "9f133bf3",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "result": {
+            "projects_list": {
+              "____source": "#{_('data.lookup_table.5125ef42.entries')}",
+              "project_name": "#{_('data.lookup_table.5125ef42.entries.first.entry.col1')}",
+              "mode": "=_('data.lookup_table.5125ef42.entries.first.entry.col3').capitalize",
+              "id": "#{_('data.lookup_table.5125ef42.entries.first.entry.col2')}"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "name": "projects_list",
+                "type": "array",
+                "of": "object",
+                "label": "Projects list",
+                "optional": false,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "project_name",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "name": "id",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Mode",
+                    "name": "mode",
+                    "type": "string",
+                    "optional": false
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "name": "projects_list",
+                "type": "array",
+                "of": "object",
+                "label": "Projects list",
+                "optional": false,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Project name",
+                    "name": "project_name",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "name": "id",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Mode",
+                    "name": "mode",
+                    "type": "string",
+                    "optional": false
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "uuid": "d6542a0c-3edb-4340-8d26-6644e36ac274"
+      }
+    ],
+    "comment": "Create and return a list of configured projects.",
+    "uuid": "a623674d-ea02-432d-b82c-dee5bb2bf109"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
